@@ -1,6 +1,6 @@
-# Copilot Studio Platform Strengths One-Pager
+# Copilot Studio Decision Guide One-Pager
 
-A customer-facing, single-page overview of Copilot Studio platform strengths derived from internal battlecard insights without sharing competitor claims.
+A customer-facing, single-page overview of Copilot Studio platform capabilities for agent authoring, enterprise data, workflow actions, publishing, and governance.
 
 ## Files
 

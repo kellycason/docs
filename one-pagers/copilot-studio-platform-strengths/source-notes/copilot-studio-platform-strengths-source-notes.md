@@ -1,8 +1,8 @@
-# Copilot Studio Platform Strengths — Source Notes
+# Copilot Studio Decision Guide — Source Notes
 
 Working date: 2026-07-13
-Audience framing: shareable summary of Microsoft Copilot Studio strengths for customers.
-Constraints honored: use Microsoft platform strengths only; back claims with public Microsoft documentation; same theme and hosting pattern as existing one-pagers.
+Audience framing: shareable Microsoft Copilot Studio decision guide for customers.
+Constraints honored: use Microsoft platform capabilities only; back claims with public Microsoft documentation; same theme and hosting pattern as existing one-pagers.
 
 ## Content framing
 
