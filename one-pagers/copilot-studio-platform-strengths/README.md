@@ -1,6 +1,6 @@
 # Copilot Studio Decision Guide One-Pager
 
-A customer-facing, single-page overview of Copilot Studio platform capabilities for agent authoring, enterprise data, workflow actions, publishing, and governance.
+A customer-facing, single-page decision guide covering Copilot Studio business value, enterprise data and actions, voice, orchestration, governance, lifecycle management, and analytics.
 
 ## Files
 
