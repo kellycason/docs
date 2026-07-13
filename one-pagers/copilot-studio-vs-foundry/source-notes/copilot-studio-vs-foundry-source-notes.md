@@ -15,11 +15,12 @@ Constraints honored: high-level; when-to-use guidance; no cost comparison; stren
 - Copilot Studio (SaaS, low-code): speed, maker/business-led, conversational/task agents, extend M365, prebuilt connectors.
 - Foundry (PaaS, pro-code): custom code-first apps, choose/fine-tune models, advanced orchestration, deep Azure integration, developer/data-scientist owned.
 
-## Government cloud availability
+## GCC / Azure environment positioning
 
 - **Copilot Studio GCC**: available; FedRAMP High; customer content stored in the US and physically separated; GCC / GCC High / DoD options. Source: requirements-licensing-gcc.
-- **Microsoft Foundry in Azure Government**: available in US Gov Virginia and US Gov Arizona; Azure OpenAI models (GPT-5.1, GPT-4.1, o-series, GPT-4o), guardrails, RBAC, private networking, tracing; Foundry Agent Service available with a subset of features. Source: foundry-azure-government.
-- Feature/model availability differs by environment and region (kept as a neutral "varies / confirm" note, not a weakness call-out).
+- **Microsoft Foundry**: Azure platform for AI apps and agents. Do not assume GCC customers use Azure Government; GCC customers may operate related Azure workloads in Azure Commercial. Source: what-is-foundry and Azure Government comparison docs.
+- **Microsoft Foundry in Azure Government**: available in US Gov Virginia and US Gov Arizona when the workload requires that boundary; guardrails, RBAC, private networking, tracing, and a subset of Foundry Agent Service features are documented. Source: foundry-azure-government.
+- Feature/model availability differs by tenant, environment, and region (kept as a neutral "varies / confirm" note, not a weakness call-out).
 
 ## Source links used
 
@@ -28,3 +29,4 @@ Constraints honored: high-level; when-to-use guidance; no cost comparison; stren
 - Choose an AI agent build path (CAF): https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy
 - Copilot Studio for US Government (GCC): https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing-gcc
 - Microsoft Foundry in Azure Government: https://learn.microsoft.com/azure/foundry/concepts/foundry-azure-government
+- Compare Azure Government and global Azure: https://learn.microsoft.com/azure/azure-government/compare-azure-government-global-azure
