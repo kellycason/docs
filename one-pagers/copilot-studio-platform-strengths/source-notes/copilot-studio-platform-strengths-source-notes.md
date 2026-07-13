@@ -13,6 +13,7 @@ Constraints honored: use Microsoft platform capabilities only; back claims with 
 
 - **Agent creation and planning**: Copilot Studio supports creating agents by describing instructions, triggers, knowledge sources, and tools in plain language, then testing and publishing across channels. Source: Copilot Studio overview.
 - **Publishing channels**: Copilot Studio can deploy agents to channels such as Teams, Microsoft 365 Copilot, SharePoint, Power Pages, websites/custom applications, and more. Source: Publish agents to channels and clients.
+- **Voice and IVR**: Copilot Studio can author Interactive Voice Response (IVR) agents for Dynamics 365 Contact Center and Dynamics 365 Customer Service. Documented voice capabilities include speech and DTMF input, SSML voice output, audio files, barge-in, generative orchestration, constrained speech recognition, call transfer, and call termination. Source: Set up IVR agents in the voice channel using Copilot Studio.
 - **Connectors and actions**: Power Platform connectors act as API wrappers and enable Copilot Studio, Power Automate, Power Apps, and Azure Logic Apps to communicate with apps and services. Connectors can be used as tools, actions in agent flows, and knowledge sources. Source: Use Power Platform connectors as tools.
 - **Data policies and governance**: Data policies govern how agents connect and interact with data and services within and outside the organization; admins configure Copilot Studio and Power Platform data policies in Power Platform admin center. Source: Configure data policies for agents.
 - **Governance controls**: Copilot Studio governance documentation describes ALM, connector governance, environment-level DLP/RBAC/auditing, flexible deployment, sharing controls, publishing oversight, Power Platform admin center management, Purview, telemetry, and usage analytics. Source: Microsoft 365 Copilot extensibility / Copilot Studio experience search result.
@@ -22,6 +23,7 @@ Constraints honored: use Microsoft platform capabilities only; back claims with 
 
 - Copilot Studio overview: https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio
 - Publish agents to channels and clients: https://learn.microsoft.com/microsoft-copilot-studio/guidance/channels
+- Set up IVR agents in the voice channel using Copilot Studio: https://learn.microsoft.com/dynamics365/customer-service/administer/voice-channel-pva-bots
 - Use Power Platform connectors as tools: https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors
 - Configure data policies for agents: https://learn.microsoft.com/microsoft-copilot-studio/admin-data-loss-prevention
 - Microsoft 365 Copilot connectors overview: https://learn.microsoft.com/microsoft-365/copilot/extensibility/overview-copilot-connector
