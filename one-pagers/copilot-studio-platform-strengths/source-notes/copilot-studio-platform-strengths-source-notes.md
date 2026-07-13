@@ -1,14 +1,13 @@
 # Copilot Studio Platform Strengths — Source Notes
 
 Working date: 2026-07-13
-Audience framing: customer-facing, shareable summary of Microsoft Copilot Studio strengths.
+Audience framing: shareable summary of Microsoft Copilot Studio strengths for customers.
 Constraints honored: use Microsoft platform strengths only; back claims with public Microsoft documentation; same theme and hosting pattern as existing one-pagers.
 
-## Positioning
+## Content framing
 
-- Customer-facing framing should lead with outcomes: productivity integration, enterprise data, security/compliance, governance, business process automation, and low-code + pro-code collaboration.
+- Content should focus on information customers can read directly: productivity integration, enterprise data, security/compliance, governance, business process automation, and low-code + pro-code collaboration.
 - Avoid vendor-negative framing; keep the page focused on Microsoft capabilities and customer outcomes.
-- Customer-facing evaluation prompt: "A useful way to evaluate Copilot Studio is to map your priority agent scenarios to the data, workflows, channels, security controls, and administration model you already operate across Microsoft 365 and Power Platform."
 
 ## Public-documentation-backed claims
 
