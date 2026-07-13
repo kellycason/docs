@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Studio Pricing Options</title>
+  <style>
+    :root {
+      --ms-bg: #ffffff;
+      --ms-alt: #f5f5f5;
+      --ms-surface: #ffffff;
+      --ms-border: #e1dfdd;
+      --ms-border-strong: #c8c6c4;
+      --ms-text: #242424;
+      --ms-heading: #1b1a19;
+      --ms-muted: #605e5c;
+      --ms-blue: #0067b8;
+      --ms-blue-dark: #005a9e;
+      --ms-blue-soft: #eff6fc;
+      --ms-blue-tint: #f3f9fd;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--ms-alt); }
+    body {
+      margin: 0;
+      color: var(--ms-text);
+      background: var(--ms-alt);
+      font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--ms-blue); text-decoration: none; }
+    a:hover { color: var(--ms-blue-dark); text-decoration: underline; }
+
+    .page {
+      width: 8.5in;
+      margin: 24px auto;
+      padding: 0.32in 0.46in 0.24in;
+      background: var(--ms-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10), 0 0 1px rgba(0,0,0,0.15);
+    }
+
+    /* Web-only elements (hidden when printing) */
+    .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 15px;
+      border-radius: 4px;
+      background: var(--ms-blue);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pdf-btn:hover { background: var(--ms-blue-dark); color: #ffffff; text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      padding-bottom: 9px;
+      margin-bottom: 11px;
+      border-bottom: 3px solid var(--ms-blue);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .brand-mark { display: block; }
+    .brand-name {
+      color: #5e5e5e;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--ms-blue);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      color: var(--ms-heading);
+      font-size: 30px;
+      line-height: 1.08;
+      font-weight: 700;
+    }
+    .subtitle {
+      margin: 8px 0 0;
+      max-width: 6.6in;
+      color: var(--ms-muted);
+      font-size: 15px;
+    }
+
+    /* Bottom-line callout */
+    .callout {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 9px 14px;
+      margin-bottom: 10px;
+      border: 1px solid #cfe4f6;
+      border-left: 4px solid var(--ms-blue);
+      border-radius: 6px;
+      background: var(--ms-blue-soft);
+    }
+    .callout .k {
+      color: var(--ms-blue-dark);
+      font-weight: 700;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+    .callout p { margin: 0; font-size: 14.5px; color: var(--ms-text); }
+
+    /* Section headings */
+    h2 {
+      margin: 0 0 7px;
+      color: var(--ms-heading);
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 7px; }
+
+    /* Pricing cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 12px;
+      border: 1px solid var(--ms-border);
+      border-top: 3px solid var(--ms-border-strong);
+      border-radius: 6px;
+      background: var(--ms-surface);
+      box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.08), 0 0.3px 0.9px rgba(0,0,0,0.06);
+    }
+    .card.featured {
+      border-top-color: var(--ms-blue);
+      background: var(--ms-blue-tint);
+    }
+    .card h3 {
+      margin: 0 0 5px;
+      color: var(--ms-heading);
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .card h3 .nb { white-space: nowrap; }
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      margin-bottom: 7px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: var(--ms-blue-soft);
+      color: var(--ms-blue-dark);
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .card.featured .tag { background: var(--ms-blue); color: #ffffff; }
+    .card p { margin: 0; color: var(--ms-muted); font-size: 13px; }
+
+    /* Two column split */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    ul.clean { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; }
+    ul.clean li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 8px;
+      align-items: start;
+      font-size: 14px;
+      color: var(--ms-text);
+    }
+    ul.clean li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 7px;
+      border-radius: 2px;
+      background: var(--ms-blue);
+    }
+    ul.clean li > span { color: var(--ms-muted); }
+    ul.clean li b { color: var(--ms-text); font-weight: 600; }
+
+    .facts { display: grid; gap: 5px; margin-top: 2px; }
+    .fact {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: baseline;
+      padding: 6px 11px;
+      border: 1px solid var(--ms-border);
+      border-radius: 6px;
+      background: var(--ms-alt);
+    }
+    .fact b { color: var(--ms-blue-dark); font-size: 15px; white-space: nowrap; }
+    .fact span { color: var(--ms-muted); font-size: 13px; }
+
+    p.lead { margin: 0 0 8px; color: var(--ms-muted); font-size: 13.5px; }
+
+    /* Choosing path chips */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .path {
+      padding: 8px 12px;
+      border: 1px solid var(--ms-border);
+      border-left: 3px solid var(--ms-blue);
+      border-radius: 6px;
+      background: var(--ms-surface);
+    }
+    .path b { display: block; color: var(--ms-heading); font-size: 14px; margin-bottom: 2px; }
+    .path span { color: var(--ms-muted); font-size: 13px; }
+
+    /* Resources */
+    .resources {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--ms-muted);
+    }
+    .resources li { display: inline; }
+    .resources li:not(:last-child)::after { content: "  \00b7  "; color: var(--ms-border-strong); }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--ms-border);
+      color: var(--ms-muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+    .disclaimer strong { color: var(--ms-text); }
+
+    @page { size: letter portrait; margin: 0; }
+    @media print {
+      html, body { background: #ffffff; }
+      .page { width: 8.5in; height: 11in; overflow: hidden; margin: 0 auto; box-shadow: none; }
+      .web-only { display: none !important; }
+      a { color: var(--ms-blue); }
+    }
+    @media screen and (max-width: 820px) {
+      .page { width: 100%; margin: 0; padding: 24px; box-shadow: none; }
+      .cards, .split { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+      .hero-top { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Copilot Studio Pricing Options overview">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand" aria-label="Microsoft">
+          <svg class="brand-mark" width="21" height="21" viewBox="0 0 21 21" role="img" aria-hidden="true">
+            <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+            <rect x="11" y="0" width="10" height="10" fill="#7FBA00"/>
+            <rect x="0" y="11" width="10" height="10" fill="#00A4EF"/>
+            <rect x="11" y="11" width="10" height="10" fill="#FFB900"/>
+          </svg>
+          <span class="brand-name">Microsoft</span>
+        </div>
+        <a class="pdf-btn web-only" href="pdf/copilot-studio-pricing-options.pdf">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <p class="eyebrow">Microsoft Copilot Studio</p>
+      <h1>Pricing &amp; Licensing Options</h1>
+      <p class="subtitle">How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed &mdash; so you can pick the right model to start.</p>
+    </header>
+
+    <div class="callout">
+      <span class="k">Bottom line</span>
+      <p>Start from your usage pattern: <b>pay-as-you-go</b> for pilots and variable workloads, and the <b>Copilot Credit Pre-Purchase Plan (P3)</b> when annual scale justifies an upfront commitment.</p>
+    </div>
+
+    <section class="section">
+      <h2>Ways to buy</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Microsoft 365 Copilot</h3>
+          <span class="tag">Per-user subscription</span>
+          <p>Best when employees are already licensed and agents extend Microsoft 365, Teams, and SharePoint. Qualifying employee-facing agent usage is included under fair-use limits; Work IQ APIs still consume Copilot Credits.</p>
+        </article>
+        <article class="card featured">
+          <h3>Copilot Studio <span class="nb">pay-as-you-go</span></h3>
+          <span class="tag">Usage-based &middot; no commitment</span>
+          <p>Post-pay only for the credits agents consume each month via an Azure-linked billing policy. Ideal for pilots, seasonal demand, and business continuity with no upfront purchase.</p>
+        </article>
+        <article class="card">
+          <h3>Copilot Credit <span class="nb">Pre-Purchase Plan (P3)</span></h3>
+          <span class="tag">Annual commitment</span>
+          <p>Buy a one-year pool of credits, drawn down automatically as agents run. Overage continues on pay-as-you-go; unused credits expire at the end of the term.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>What you need to start</h2>
+        <ul class="clean">
+          <li><span><b>Maker access</b> &mdash; a Copilot Studio user license (no cost), the author role, a Microsoft 365 Copilot license, or a trial.</span></li>
+          <li><span><b>A billing path</b> &mdash; pay-as-you-go or the Copilot Credit Pre-Purchase Plan (P3), or qualifying Microsoft 365 Copilot rights.</span></li>
+          <li><span><b>Governance (recommended)</b> &mdash; set up environment strategy, DLP, spend policies, alerts, and per-agent limits as you scale.</span></li>
+          <li><span><b>A usage estimate</b> &mdash; sized with the <a href="https://microsoft.github.io/copilot-studio-estimator/">Copilot Credit usage estimator</a>.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2>How credits are consumed</h2>
+        <p class="lead">Copilot Credits are the common, tenant-pooled currency for agents. Consumption scales with how an agent retrieves knowledge, reasons, runs workflows, calls AI tools, takes actions, and handles voice.</p>
+        <div class="facts">
+          <div class="fact"><b>Tenant-pooled</b><span>Credits are shared across the tenant and allocated per environment.</span></div>
+          <div class="fact"><b>No commitment</b><span>Pay-as-you-go bills only for what agents use each month.</span></div>
+          <div class="fact"><b>One-year term</b><span>Pre-Purchase Plan (P3) credits are prepaid and expire at term end.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Learn more</h2>
+      <ul class="resources">
+        <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/billing-licensing">Copilot Studio licensing</a></li>
+        <li><a href="https://go.microsoft.com/fwlink/?linkid=2320995">Microsoft Copilot Studio Licensing Guide</a></li>
+        <li><a href="https://go.microsoft.com/fwlink/?linkid=2368800">Copilot Credit Guide</a></li>
+        <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/requirements-messages-management">Billing rates &amp; management</a></li>
+        <li><a href="https://learn.microsoft.com/power-platform/admin/manage-copilot-studio-messages-capacity">Manage credits &amp; capacity</a></li>
+        <li><a href="https://learn.microsoft.com/azure/cost-management-billing/reservations/copilot-credit-p3">Copilot Credit Pre-Purchase Plan</a></li>
+        <li><a href="https://microsoft.github.io/copilot-studio-estimator/">Copilot Credit usage estimator</a></li>
+        <li><a href="https://www.microsoft.com/microsoft-365-copilot/pricing/copilot-studio">Copilot Studio pricing page</a></li>
+      </ul>
+    </section>
+
+    <p class="disclaimer">
+      <strong>Reference only &mdash; not a quote.</strong> This document reflects current list pricing and licensing information as of <strong>July 13, 2026</strong>, and is provided for general reference. Nothing here is a quote, offer, or commitment, and no pricing is guaranteed. Plans, pricing, discounts, and terms are subject to change without notice. Actual pricing depends on your Microsoft agreement, your reseller, and the Microsoft Product Terms, which control in the event of any conflict. Do not use this document as the basis for a purchase quote; confirm current pricing with your Microsoft account team or a Microsoft Certified Partner. All amounts referenced are in USD.
+    </p>
+  </main>
+</body>
+</html>

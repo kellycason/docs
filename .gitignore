@@ -1,0 +1,8 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Working / QA artifacts (regenerated on demand)
+**/assets/preview.png
+**/assets/pdf-page1.png

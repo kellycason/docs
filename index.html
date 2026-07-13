@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Microsoft Copilot Studio &mdash; One-Pagers</title>
+  <style>
+    :root {
+      --ms-bg: #ffffff;
+      --ms-alt: #f5f5f5;
+      --ms-border: #e1dfdd;
+      --ms-text: #242424;
+      --ms-heading: #1b1a19;
+      --ms-muted: #605e5c;
+      --ms-blue: #0067b8;
+      --ms-blue-dark: #005a9e;
+      --ms-blue-soft: #eff6fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ms-text);
+      background: var(--ms-alt);
+      font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--ms-blue); text-decoration: none; }
+    a:hover { color: var(--ms-blue-dark); text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 64px; }
+    .brand { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+    .brand-name { color: #5e5e5e; font-size: 19px; font-weight: 600; }
+    .eyebrow { margin: 0 0 6px; color: var(--ms-blue); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+    h1 { margin: 0; color: var(--ms-heading); font-size: 34px; font-weight: 700; }
+    .lede { margin: 12px 0 32px; color: var(--ms-muted); font-size: 16px; max-width: 40em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card {
+      display: block;
+      padding: 20px;
+      border: 1px solid var(--ms-border);
+      border-top: 3px solid var(--ms-blue);
+      border-radius: 8px;
+      background: var(--ms-bg);
+      box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.08), 0 0.3px 0.9px rgba(0,0,0,0.06);
+      color: inherit;
+    }
+    .card:hover { text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+    .card h2 { margin: 0 0 6px; font-size: 18px; color: var(--ms-heading); }
+    .card p { margin: 0 0 14px; color: var(--ms-muted); font-size: 14px; }
+    .card .links { display: flex; gap: 14px; font-size: 13px; font-weight: 600; }
+    .card .links span:first-child { color: var(--ms-blue); }
+    .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--ms-border); color: var(--ms-muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand" aria-label="Microsoft">
+      <svg width="21" height="21" viewBox="0 0 21 21" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="11" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="11" width="10" height="10" fill="#00A4EF"/>
+        <rect x="11" y="11" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="brand-name">Microsoft</span>
+    </div>
+    <p class="eyebrow">Copilot Studio</p>
+    <h1>One-Pagers &amp; Reference Guides</h1>
+    <p class="lede">A collection of shareable, single-page overviews for Microsoft Copilot Studio. Each opens as a web page and offers a printable PDF.</p>
+
+    <div class="grid">
+      <a class="card" href="one-pagers/copilot-studio-pricing-options/">
+        <h2>Pricing &amp; Licensing Options</h2>
+        <p>How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed.</p>
+        <div class="links"><span>View page &rsaquo;</span><span><a href="one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf">PDF</a></span></div>
+      </a>
+    </div>
+
+    <p class="foot">For general reference only. Pricing and licensing are subject to change; confirm current details with your Microsoft account team or a Microsoft Certified Partner.</p>
+  </main>
+</body>
+</html>
