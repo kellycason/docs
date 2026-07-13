@@ -35,6 +35,7 @@
     .lede { margin: 12px 0 32px; color: var(--ms-muted); font-size: 16px; max-width: 40em; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
     .card {
+      position: relative;
       display: block;
       padding: 20px;
       border: 1px solid var(--ms-border);
@@ -42,13 +43,16 @@
       border-radius: 8px;
       background: var(--ms-bg);
       box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.08), 0 0.3px 0.9px rgba(0,0,0,0.06);
-      color: inherit;
     }
-    .card:hover { text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
-    .card h2 { margin: 0 0 6px; font-size: 18px; color: var(--ms-heading); }
+    .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+    .card h2 { margin: 0 0 6px; font-size: 18px; }
+    .card h2 a { color: var(--ms-heading); text-decoration: none; }
+    .card h2 a::after { content: ""; position: absolute; inset: 0; }
+    .card:hover h2 a { color: var(--ms-blue); }
     .card p { margin: 0 0 14px; color: var(--ms-muted); font-size: 14px; }
-    .card .links { display: flex; gap: 14px; font-size: 13px; font-weight: 600; }
-    .card .links span:first-child { color: var(--ms-blue); }
+    .card .links { display: flex; gap: 16px; font-size: 13px; font-weight: 600; }
+    .card .links .view { color: var(--ms-blue); }
+    .card .links a { color: var(--ms-blue); position: relative; z-index: 1; }
     .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--ms-border); color: var(--ms-muted); font-size: 12px; }
   </style>
 </head>
@@ -68,11 +72,11 @@
     <p class="lede">A collection of shareable, single-page overviews for Microsoft Copilot Studio. Each opens as a web page and offers a printable PDF.</p>
 
     <div class="grid">
-      <a class="card" href="one-pagers/copilot-studio-pricing-options/">
-        <h2>Pricing &amp; Licensing Options</h2>
+      <div class="card">
+        <h2><a href="one-pagers/copilot-studio-pricing-options/">Pricing &amp; Licensing Options</a></h2>
         <p>How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed.</p>
-        <div class="links"><span>View page &rsaquo;</span><span><a href="one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf">PDF</a></span></div>
-      </a>
+        <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf">PDF</a></div>
+      </div>
     </div>
 
     <p class="foot">For general reference only. Pricing and licensing are subject to change; confirm current details with your Microsoft account team or a Microsoft Certified Partner.</p>
