@@ -1,0 +1,44 @@
+name: Release Power Pages skill
+
+on:
+  push:
+    tags:
+      - power-pages-code-site-v*
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate package and tag
+        shell: bash
+        run: |
+          node scripts/validate-skill.mjs
+          version="$(tr -d '[:space:]' < skills/power-pages-code-site/VERSION)"
+          expected="power-pages-code-site-v${version}"
+          if [[ "${GITHUB_REF_NAME}" != "${expected}" ]]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match VERSION ${version}." >&2
+            exit 1
+          fi
+
+      - name: Build release archive
+        shell: bash
+        run: |
+          mkdir -p release
+          cp -R skills/power-pages-code-site release/power-pages-code-site
+          cd release
+          zip -r ../power-pages-code-site.zip power-pages-code-site
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: power-pages-code-site.zip
+          generate_release_notes: true
