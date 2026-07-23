@@ -452,6 +452,11 @@
 
     <p class="disclaimer"><strong>Reference baseline.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong> for GCC, not GCC High or DoD. Availability, licensing, release timing, and controls can vary by tenant and configuration. Validate conditional features in the target GCC tenant; official Microsoft terms and documentation control.</p>
   </main>
-
+  <script>
+    document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
+  </script>
 </body>
 </html>
