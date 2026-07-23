@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Studio Billing Configuration Guide</title>
+  <style>
+    :root {
+      --cp-bg: #f5f5f5;
+      --cp-bg-elevated: #ffffff;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #e1dfdd;
+      --cp-border-strong: #c8c6c4;
+      --cp-text: #242424;
+      --cp-text-muted: #605e5c;
+      --cp-text-soft: #605e5c;
+      --cp-accent: #0067b8;
+      --cp-accent-hover: #005a9e;
+      --cp-accent-soft: #eff6fc;
+      --cp-accent-fg: #ffffff;
+      --cp-success: #107c10;
+      --cp-danger: #a4262c;
+      --cp-warning: #8a6d00;
+      --cp-link: #0067b8;
+      --cp-shadow: 0 2px 10px rgba(0, 0, 0, 0.10), 0 0 1px rgba(0, 0, 0, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--cp-bg); }
+    body {
+      margin: 0;
+      color: var(--cp-text);
+      background: var(--cp-bg);
+      font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cp-link); text-decoration: none; }
+    a:hover { color: var(--cp-accent-hover); text-decoration: underline; }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 1.5rem auto;
+      padding: 0.32in 0.46in 0.24in;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+    }
+    .hero { padding-bottom: 0.55rem; border-bottom: 0.2rem solid var(--cp-accent); }
+    .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .brand { display: flex; align-items: center; gap: 0.5rem; color: var(--cp-text-muted); font-size: 1.18rem; font-weight: 600; }
+    .brand-mark { width: 1.31rem; height: 1.31rem; }
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.25rem;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pdf-btn:hover { border-color: var(--cp-accent-hover); background: var(--cp-accent-hover); color: var(--cp-accent-fg); text-decoration: none; }
+    .eyebrow { margin: 0.62rem 0 0.18rem; color: var(--cp-accent); font-size: 0.7rem; font-weight: 750; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 1.72rem; line-height: 1.08; font-weight: 750; }
+    .subtitle { max-width: 7.1in; margin: 0.38rem 0 0; color: var(--cp-text-muted); font-size: 0.82rem; line-height: 1.34; }
+
+    .callout {
+      display: grid;
+      grid-template-columns: 1.15in 1fr;
+      gap: 0.65rem;
+      margin: 0.52rem 0 0.55rem;
+      padding: 0.45rem 0.62rem;
+      border-left: 0.25rem solid var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+    .callout strong { color: var(--cp-accent); font-size: 0.76rem; }
+    .callout p { margin: 0; font-size: 0.7rem; line-height: 1.35; }
+
+    h2 { margin: 0 0 0.35rem; font-size: 0.84rem; }
+    .comparison { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.61rem; line-height: 1.27; }
+    .comparison th, .comparison td { padding: 0.32rem 0.34rem; border: 1px solid var(--cp-border); vertical-align: top; }
+    .comparison th { background: var(--cp-surface-soft); color: var(--cp-text); text-align: left; font-weight: 750; }
+    .comparison td { color: var(--cp-text-muted); }
+    .comparison td:first-child { color: var(--cp-text); font-weight: 720; }
+    .comparison strong { color: var(--cp-text); }
+    .col-config { width: 17%; }
+    .col-source { width: 21%; }
+    .col-over { width: 36%; }
+    .col-azure { width: 11%; }
+    .col-stop { width: 15%; }
+    .answer { display: block; margin-bottom: 0.08rem; color: var(--cp-text); font-weight: 750; }
+    .answer.yes { color: var(--cp-danger); }
+    .answer.no { color: var(--cp-success); }
+    .answer.partial { color: var(--cp-warning); }
+
+    .controls { margin-top: 0.52rem; }
+    .control-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.36rem; }
+    .control {
+      min-height: 0.58in;
+      padding: 0.34rem 0.4rem;
+      border-top: 0.13rem solid var(--cp-accent);
+      background: var(--cp-surface-soft);
+    }
+    .control h3 { margin: 0 0 0.1rem; font-size: 0.65rem; }
+    .control p { margin: 0; color: var(--cp-text-muted); font-size: 0.57rem; line-height: 1.27; }
+
+    .patterns { margin-top: 0.5rem; }
+    .pattern-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.34rem; }
+    .pattern { padding: 0.32rem 0.38rem; border: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+    .pattern strong { display: block; margin-bottom: 0.08rem; color: var(--cp-text); font-size: 0.63rem; }
+    .pattern span { display: block; color: var(--cp-text-muted); font-size: 0.56rem; line-height: 1.25; }
+
+    .resources { display: flex; flex-wrap: wrap; gap: 0.08rem 0.5rem; margin: 0.45rem 0 0; padding: 0; list-style: none; font-size: 0.59rem; line-height: 1.3; }
+    .resources li:not(:last-child)::after { content: "\00b7"; margin-left: 0.5rem; color: var(--cp-border-strong); }
+    .disclaimer { margin: 0.32rem 0 0; color: var(--cp-text-soft); font-size: 0.53rem; line-height: 1.25; }
+    .disclaimer strong { color: var(--cp-text-muted); }
+
+    @page { size: letter portrait; margin: 0; }
+    @media print {
+      html, body { background: #ffffff; }
+      .page { width: 8.5in; height: 11in; min-height: 11in; margin: 0; overflow: hidden; box-shadow: none; }
+      .web-only { display: none !important; }
+    }
+    @media screen and (max-width: 820px) {
+      .page { width: 100%; min-height: 0; margin: 0; padding: 1.5rem; box-shadow: none; }
+      .hero-top { flex-wrap: wrap; }
+      .comparison { min-width: 48rem; }
+      .table-scroll { overflow-x: auto; }
+      .control-grid { grid-template-columns: 1fr 1fr; }
+      .pattern-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media screen and (max-width: 480px) {
+      .callout { grid-template-columns: 1fr; gap: 0.2rem; }
+      .control-grid, .pattern-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Copilot Studio billing configuration guide">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand" aria-label="Microsoft">
+          <svg class="brand-mark" viewBox="0 0 21 21" role="img" aria-hidden="true">
+            <rect x="0" y="0" width="10" height="10" fill="#F25022"></rect>
+            <rect x="11" y="0" width="10" height="10" fill="#7FBA00"></rect>
+            <rect x="0" y="11" width="10" height="10" fill="#00A4EF"></rect>
+            <rect x="11" y="11" width="10" height="10" fill="#FFB900"></rect>
+          </svg>
+          <span>Microsoft</span>
+        </div>
+        <a class="pdf-btn web-only" href="pdf/copilot-studio-billing-configuration.pdf">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+      <p class="eyebrow">Billing Configuration Guide | GCC Planning</p>
+      <h1>Choose how agent usage is funded and controlled</h1>
+      <p class="subtitle">Compare prepaid capacity, tenant spillover, pay-as-you-go, and Microsoft 365 Copilot inclusion &mdash; then decide how each environment should behave when usage exceeds its plan.</p>
+    </header>
+
+    <section class="callout" aria-label="Billing principle">
+      <strong>Know the difference</strong>
+      <p><b>Capacity allocation</b> assigns a budget, <b>Azure budgets</b> send alerts, and <b>per-agent limits</b> can stop usage. These are separate controls.</p>
+    </section>
+
+    <section aria-labelledby="comparison-title">
+      <h2 id="comparison-title">Billing configurations and overage behavior</h2>
+      <div class="table-scroll">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th class="col-config">Configuration</th>
+              <th class="col-source">How capacity is assigned</th>
+              <th class="col-over">When planned capacity is used</th>
+              <th class="col-azure">Azure charge?</th>
+              <th class="col-stop">Hard stop?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Prepaid only<br>No fallback</td>
+              <td>Tenant-pooled credits are allocated to the environment.</td>
+              <td>Enters overage with no PAYG path. Custom agents can continue during the enforcement grace period and may later be disabled. Monthly usage resets; overage isn't deducted from the next allocation.</td>
+              <td><span class="answer no">No</span></td>
+              <td><span class="answer partial">Not exact</span>Not at the environment allocation.</td>
+            </tr>
+            <tr>
+              <td>Prepaid +<br>Tenant spillover</td>
+              <td>Environment allocation plus available tenant prepaid capacity.</td>
+              <td>Draws from the remaining tenant pool after its allocation. This can consume capacity that might otherwise serve other agencies.</td>
+              <td><span class="answer no">No</span></td>
+              <td><span class="answer partial">Not exact</span>Prepaid enforcement applies after capacity is exhausted.</td>
+            </tr>
+            <tr>
+              <td>PAYG only</td>
+              <td>The environment is linked to an Azure billing plan.</td>
+              <td>Every billable Copilot Credit is metered to Azure. Usage continues until the agent or billing path is stopped, or an applicable agent limit is reached.</td>
+              <td><span class="answer yes">Yes</span>All billable usage.</td>
+              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
+            </tr>
+            <tr>
+              <td>Prepaid +<br>PAYG overage</td>
+              <td>Prepaid allocation first; linked Azure plan covers overage.</td>
+              <td>Additional usage is billed to Azure after prepaid capacity is consumed, preserving service continuity.</td>
+              <td><span class="answer yes">Yes</span>Overage only.</td>
+              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
+            </tr>
+            <tr>
+              <td>Prepaid +<br>Both fallbacks</td>
+              <td>Environment allocation, tenant capacity, and linked PAYG.</td>
+              <td>Both tenant capacity and PAYG can cover overage. Public documentation doesn't state a guaranteed priority. This is the least strict agency allocation.</td>
+              <td><span class="answer yes">Partial</span>PAYG-billed usage.</td>
+              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
+            </tr>
+            <tr>
+              <td>Microsoft 365 Copilot inclusion</td>
+              <td>Qualifying employee-facing usage is included for an authenticated licensed user.</td>
+              <td>Included usage is zero-rated. Nonincluded scenarios use the configured prepaid or PAYG path. Fair-use and service limits still apply.</td>
+              <td><span class="answer partial">Depends</span>On the scenario.</td>
+              <td><span class="answer partial">Service limits</span>Not a budget cap.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="controls" aria-labelledby="controls-title">
+      <h2 id="controls-title">What each control actually does</h2>
+      <div class="control-grid">
+        <article class="control"><h3>Environment allocation</h3><p>Assigns a planned share of prepaid tenant capacity. It isn't an exact hard stop.</p></article>
+        <article class="control"><h3>Draw from tenant</h3><p>Lets an environment use available shared prepaid credits after its allocation.</p></article>
+        <article class="control"><h3>Bill to PAYG</h3><p>Sends applicable usage or overage to the linked Azure subscription.</p></article>
+        <article class="control"><h3>Azure budget</h3><p>Sends actual or forecasted cost alerts. It doesn't stop agents or PAYG consumption.</p></article>
+        <article class="control"><h3>Per-agent monthly limit</h3><p>Can notify admins and automatically turn off that agent at its limit, where available.</p></article>
+        <article class="control"><h3>Disable or disconnect</h3><p>Stops the agent or removes the PAYG path; another valid capacity path might be required.</p></article>
+      </div>
+    </section>
+
+    <section class="patterns" aria-labelledby="patterns-title">
+      <h2 id="patterns-title">Recommended agency patterns</h2>
+      <div class="pattern-grid">
+        <div class="pattern"><strong>Strict control</strong><span>Prepaid, no tenant spillover, plus per-agent limits.</span></div>
+        <div class="pattern"><strong>Shared central pool</strong><span>Prepaid with tenant spillover and close monitoring.</span></div>
+        <div class="pattern"><strong>Clean chargeback</strong><span>One PAYG billing plan per agency and its environments.</span></div>
+        <div class="pattern"><strong>Business continuity</strong><span>Prepaid baseline, agency PAYG overage, alerts, and agent limits.</span></div>
+      </div>
+    </section>
+
+    <ul class="resources" aria-label="Official Microsoft resources">
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/billing-licensing">Licensing options</a></li>
+      <li><a href="https://learn.microsoft.com/power-platform/admin/manage-copilot-studio-messages-capacity">Capacity management</a></li>
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/requirements-messages-management#overage-enforcement">Overage enforcement</a></li>
+      <li><a href="https://learn.microsoft.com/power-platform/admin/pay-as-you-go-overview">PAYG billing plans</a></li>
+      <li><a href="https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets">Azure budgets</a></li>
+    </ul>
+
+    <p class="disclaimer"><strong>Reference only.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong>. Confirm pricing, licensing, PAYG availability, overage routing, reporting, and per-agent limit controls in the target GCC tenant and Microsoft agreement. Official Microsoft terms and documentation control.</p>
+  </main>
+
+</body>
+</html>
