@@ -308,8 +308,8 @@
     </header>
 
     <section class="baseline" aria-label="Baseline principle">
-      <strong>Start before build</strong>
-      <p>Personal, read-only productivity agents can use a low-risk lane. Shared, action-taking, or mission-critical agents can use an IT-managed lifecycle. Each organization defines its classifications, approvals, ownership fields, and review cadence.</p>
+      <strong>Early planning can help</strong>
+      <p>Personal, read-only productivity agents can use a low-risk lane. Shared, action-taking, or mission-critical agents may benefit from an IT-managed lifecycle. Each organization can define its own classifications, approvals, ownership fields, and review cadence.</p>
     </section>
 
     <section class="roadmap" aria-label="Nine-step governance roadmap">
@@ -322,21 +322,21 @@
           <span class="step-number">1</span>
           <div>
             <h3>Classify and assign owners</h3>
-            <p>Classify personal, departmental, or mission-critical use. Record the business owner, technical owner, backup owner, support contact, audience, risk, cost center, and next review date. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/guidance/sec-gov-phase2">Governance zones &rsaquo;</a></p>
+            <p>Consider whether an agent is personal, departmental, or mission-critical. Helpful ownership details can include business and technical owners, a backup, support contact, audience, risk, cost center, and review date. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/guidance/sec-gov-phase2">Governance zones &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">2</span>
           <div>
             <h3>Create lifecycle environments</h3>
-            <p>Use separate development, test, and production environments for shared agents. Attach Microsoft Entra security groups, assign least-privilege roles through group teams, and keep production authoring access small. <a class="step-link" href="https://learn.microsoft.com/power-platform/admin/environments-overview">Environment strategy &rsaquo;</a></p>
+            <p>Separate development, test, and production environments can help isolate shared agents. Entra security groups, group-team roles, and limited production authoring access are controls an organization can consider. <a class="step-link" href="https://learn.microsoft.com/power-platform/admin/environments-overview">Environment strategy &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">3</span>
           <div>
             <h3>Enforce DLP and identity</h3>
-            <p>Microsoft Entra authentication and data policies can govern knowledge types, connectors and tools, HTTP, skills, and channels. Endpoint filtering is preview and should be verified in GCC. Test policy enforcement before publishing. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-data-loss-prevention">Configure data policies &rsaquo;</a></p>
+            <p>Microsoft Entra authentication and data policies can help govern knowledge types, connectors and tools, HTTP, skills, and channels. Endpoint filtering is preview and can be evaluated in GCC. Testing policies before publishing can confirm expected behavior. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-data-loss-prevention">Configure data policies &rsaquo;</a></p>
           </div>
         </article>
       </section>
@@ -350,21 +350,21 @@
           <span class="step-number">4</span>
           <div>
             <h3>Review data and connections</h3>
-            <p>Correct SharePoint permissions before connecting a site. Record each source, endpoint, connection identity, secret, third-party processor, and residency exception. Prefer user-context access and least-privilege identities. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint">SharePoint knowledge access &rsaquo;</a></p>
+            <p>Before connecting SharePoint, consider reviewing its permissions. It can also help to record sources, endpoints, connection identities, secrets, third-party processors, and residency exceptions, and to evaluate user-context access. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint">SharePoint knowledge access &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">5</span>
           <div>
             <h3>Standardize build and test</h3>
-            <p>Require scoped instructions, approved tools, safe failure behavior, expected outcomes, abuse cases, a human or support path, and test evidence. Validate with limited users before production review. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-test-bot">Test your agent &rsaquo;</a></p>
+            <p>Useful test planning can include clear instructions, reviewed tools, safe failure behavior, expected outcomes, abuse cases, a support path, and test evidence. Limited-user validation can provide feedback before broader release. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-test-bot">Test your agent &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">6</span>
           <div>
             <h3>Promote with controlled ALM</h3>
-            <p>Custom solutions move agents between environments. Review required objects before export and reconfigure target-specific components and authentication after import. PAC CLI and Azure DevOps Build Tools support GCC. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-overview">Solutions and ALM &rsaquo;</a></p>
+            <p>Custom solutions can support moving agents between environments. Teams can review required objects before export and plan for target-specific component and authentication setup after import. PAC CLI and Azure DevOps Build Tools support GCC. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-overview">Solutions and ALM &rsaquo;</a></p>
           </div>
         </article>
       </section>
@@ -378,28 +378,28 @@
           <span class="step-number">7</span>
           <div>
             <h3>Gate sharing and publishing</h3>
-            <p>Separate Editor from Viewer access and share only with approved groups. Require owner, security/data, test, support, and funding approval. GCC organization-wide Teams and Microsoft 365 publication uses admin submission. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots">Share agents safely &rsaquo;</a></p>
+            <p>Editor and Viewer access can be separated and scoped to selected users or groups. Organizations may include owner, security/data, test, support, or funding review before broad publishing. GCC organization-wide publication uses admin submission. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots">Share agents safely &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">8</span>
           <div>
             <h3>Monitor, retain, and respond</h3>
-            <p>In supported Dataverse environments, settings control transcript saving and owner/editor access; Power Apps viewing also requires Bot Transcript Viewer. M365 Copilot agents don't write to this table. Purview controls are available in GCC subject to licensing. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-transcript-controls">Transcript controls &rsaquo;</a></p>
+            <p>In supported Dataverse environments, settings can control transcript saving and owner/editor access; Power Apps viewing also requires Bot Transcript Viewer. M365 Copilot agents don't write to this table. Purview controls are available in GCC subject to licensing. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-transcript-controls">Transcript controls &rsaquo;</a></p>
           </div>
         </article>
         <article class="step">
           <span class="step-number">9</span>
           <div>
             <h3>Fund, meter, and review</h3>
-            <p>Document a capacity owner, cost center, and chosen funding path for each production environment. PAYG and newer capacity controls should be verified in the target GCC tenant. <a class="step-link" href="../copilot-studio-billing-configuration/" target="_blank" rel="noopener noreferrer">Billing configuration guide &rsaquo;</a></p>
+            <p>It may be useful to identify a capacity owner, cost center, and funding path for each production environment. PAYG and newer capacity controls can be confirmed in the target GCC tenant. <a class="step-link" href="../copilot-studio-billing-configuration/" target="_blank" rel="noopener noreferrer">Billing configuration guide &rsaquo;</a></p>
           </div>
         </article>
       </section>
     </section>
 
     <section class="publish-gate" aria-labelledby="publish-gate-title">
-      <h2 id="publish-gate-title">Example organization-defined production gate</h2>
+      <h2 id="publish-gate-title">Possible production-readiness checks</h2>
       <div class="gate-grid">
         <span class="gate-item">Primary and backup owners</span>
         <span class="gate-item">Approved audience and risk</span>
