@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Studio Governance Baseline for GCC</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--cp-bg); }
+    body {
+      margin: 0;
+      color: var(--cp-text);
+      background:
+        linear-gradient(var(--cp-highlight), var(--cp-highlight)) top left / 100% 0.3rem no-repeat,
+        var(--cp-bg);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cp-link); text-decoration: none; }
+    a:hover { color: var(--cp-accent-hover); text-decoration: underline; }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 1.5rem auto;
+      padding: 0.3in 0.4in 0.24in;
+      border: 1px solid var(--cp-border);
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+    }
+    .hero {
+      padding-bottom: 0.6rem;
+      border-bottom: 0.2rem solid var(--cp-accent);
+    }
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cp-text-muted);
+      font-size: 1.05rem;
+      font-weight: 650;
+    }
+    .brand-mark { width: 1.2rem; height: 1.2rem; color: var(--cp-accent); }
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pdf-btn:hover {
+      border-color: var(--cp-accent-hover);
+      background: var(--cp-accent-hover);
+      color: var(--cp-accent-fg);
+      text-decoration: none;
+    }
+    .eyebrow {
+      margin: 0.65rem 0 0.2rem;
+      color: var(--cp-accent);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      color: var(--cp-text);
+      font-size: 1.8rem;
+      line-height: 1.08;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 7.1in;
+      margin: 0.4rem 0 0;
+      color: var(--cp-text-muted);
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+    .baseline {
+      display: grid;
+      grid-template-columns: 1.1in 1fr;
+      gap: 0.7rem;
+      align-items: start;
+      margin: 0.55rem 0 0.6rem;
+      padding: 0.5rem 0.65rem;
+      border-left: 0.25rem solid var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+    .baseline strong { color: var(--cp-accent); font-size: 0.8rem; }
+    .baseline p { margin: 0; color: var(--cp-text); font-size: 0.76rem; line-height: 1.35; }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      align-items: start;
+    }
+    .phase {
+      min-width: 0;
+      border-top: 0.18rem solid var(--cp-accent);
+      background: var(--cp-surface-soft);
+    }
+    .phase-head { padding: 0.45rem 0.55rem 0.4rem; }
+    .phase-kicker {
+      margin: 0 0 0.1rem;
+      color: var(--cp-accent);
+      font-size: 0.65rem;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+    .phase h2 { margin: 0; color: var(--cp-text); font-size: 0.93rem; line-height: 1.15; }
+    .step {
+      display: grid;
+      grid-template-columns: 1.55rem 1fr;
+      gap: 0.45rem;
+      min-height: 1.22in;
+      padding: 0.48rem 0.55rem;
+      border-top: 1px solid var(--cp-border);
+      background: var(--cp-surface);
+    }
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-size: 0.72rem;
+      font-weight: 750;
+      line-height: 1;
+    }
+    .step h3 {
+      margin: 0 0 0.18rem;
+      color: var(--cp-text);
+      font-size: 0.79rem;
+      line-height: 1.2;
+    }
+    .step p {
+      margin: 0;
+      color: var(--cp-text-muted);
+      font-size: 0.675rem;
+      line-height: 1.36;
+    }
+    .step-link { font-weight: 700; }
+
+    .publish-gate {
+      margin-top: 0.6rem;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-bg-elevated);
+    }
+    .publish-gate h2 { margin: 0 0 0.35rem; font-size: 0.82rem; }
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.28rem 0.55rem;
+    }
+    .gate-item {
+      display: grid;
+      grid-template-columns: 0.75rem 1fr;
+      gap: 0.28rem;
+      color: var(--cp-text-muted);
+      font-size: 0.65rem;
+      line-height: 1.25;
+    }
+    .gate-item::before { content: "\2713"; color: var(--cp-success); font-weight: 800; }
+
+    .billing {
+      margin-top: 0.55rem;
+      padding: 0.48rem 0.6rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-bg-elevated);
+    }
+    .billing-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+    .billing-head h2 { margin: 0; font-size: 0.82rem; }
+    .billing-head p { margin: 0; color: var(--cp-text-muted); font-size: 0.61rem; }
+    .billing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+    .billing-card {
+      padding: 0.4rem 0.45rem;
+      border-top: 0.14rem solid var(--cp-accent);
+      background: var(--cp-surface);
+    }
+    .billing-card h3 { margin: 0 0 0.15rem; font-size: 0.7rem; }
+    .billing-card p { margin: 0; color: var(--cp-text-muted); font-size: 0.59rem; line-height: 1.3; }
+    .billing-card strong { color: var(--cp-text); }
+    .billing-note {
+      margin: 0.35rem 0 0;
+      color: var(--cp-text-muted);
+      font-size: 0.58rem;
+      line-height: 1.3;
+    }
+
+    .resources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.1rem 0.55rem;
+      margin: 0.45rem 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.62rem;
+      line-height: 1.35;
+    }
+    .resources li:not(:last-child)::after { content: "\00b7"; margin-left: 0.55rem; color: var(--cp-border-strong); }
+    .disclaimer {
+      margin: 0.35rem 0 0;
+      color: var(--cp-text-soft);
+      font-size: 0.55rem;
+      line-height: 1.28;
+    }
+    .disclaimer strong { color: var(--cp-text-muted); }
+
+    @page { size: letter portrait; margin: 0; }
+    @media print {
+      html, body { background: var(--cp-surface); }
+      .page {
+        width: 8.5in;
+        height: 11in;
+        min-height: 11in;
+        margin: 0;
+        overflow: hidden;
+        border: 0;
+        box-shadow: none;
+      }
+      .web-only { display: none !important; }
+    }
+    @media screen and (max-width: 820px) {
+      .page { width: 100%; min-height: 0; margin: 0; padding: 1.25rem; border: 0; box-shadow: none; }
+      .roadmap { grid-template-columns: 1fr; }
+      .step { min-height: 0; }
+      .gate-grid { grid-template-columns: 1fr 1fr; }
+      .billing-head { display: block; }
+      .billing-head p { margin-top: 0.2rem; }
+      .billing-grid { grid-template-columns: 1fr; }
+      .hero-top { flex-wrap: wrap; }
+      h1 { font-size: 1.65rem; }
+    }
+    @media screen and (max-width: 480px) {
+      .baseline { grid-template-columns: 1fr; gap: 0.2rem; }
+      .gate-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Copilot Studio governance baseline for GCC">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand" aria-label="Microsoft Copilot Studio">
+          <svg class="brand-mark" viewBox="0 0 20 20" role="img" aria-hidden="true">
+            <rect x="1" y="1" width="8" height="8" fill="currentColor"></rect>
+            <rect x="11" y="1" width="8" height="8" fill="currentColor"></rect>
+            <rect x="1" y="11" width="8" height="8" fill="currentColor"></rect>
+            <rect x="11" y="11" width="8" height="8" fill="currentColor"></rect>
+          </svg>
+          <span>Microsoft Copilot Studio</span>
+        </div>
+        <a class="pdf-btn web-only" href="pdf/copilot-studio-governance-baseline.pdf">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+      <p class="eyebrow">Governance Baseline | GCC</p>
+      <h1>Build, share, and operate agents with control</h1>
+      <p class="subtitle">A sequenced launch plan for Microsoft 365 Copilot and Copilot Studio agents: establish ownership and data boundaries first, then govern delivery, publishing, evidence, and consumption.</p>
+    </header>
+
+    <section class="baseline" aria-label="Baseline principle">
+      <strong>Start before build</strong>
+      <p>Personal, read-only productivity agents can use a low-risk lane. Agents shared across a department, connected to business actions, or treated as mission-critical should use an IT-managed Copilot Studio lifecycle.</p>
+    </section>
+
+    <section class="roadmap" aria-label="Nine-step governance roadmap">
+      <section class="phase" aria-labelledby="phase-foundation">
+        <div class="phase-head">
+          <p class="phase-kicker">Phase 1 | Foundation</p>
+          <h2 id="phase-foundation">Establish control</h2>
+        </div>
+        <article class="step">
+          <span class="step-number">1</span>
+          <div>
+            <h3>Classify and assign owners</h3>
+            <p>Classify personal, departmental, or mission-critical use. Record the business owner, technical owner, backup owner, support contact, audience, risk, cost center, and next review date. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/guidance/sec-gov-phase2">Governance zones &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">2</span>
+          <div>
+            <h3>Create lifecycle environments</h3>
+            <p>Use separate development, test, and production environments for shared agents. Attach Microsoft Entra security groups, assign least-privilege roles through group teams, and keep production authoring access small. <a class="step-link" href="https://learn.microsoft.com/power-platform/admin/environments-overview">Environment strategy &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">3</span>
+          <div>
+            <h3>Enforce DLP and identity</h3>
+            <p>Require Microsoft Entra authentication. Allow only approved knowledge types, connectors and tools, HTTP endpoints, skills, and channels. Test that policy violations block publishing before makers proceed. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-data-loss-prevention">Configure data policies &rsaquo;</a></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="phase" aria-labelledby="phase-delivery">
+        <div class="phase-head">
+          <p class="phase-kicker">Phase 2 | Delivery</p>
+          <h2 id="phase-delivery">Release safely</h2>
+        </div>
+        <article class="step">
+          <span class="step-number">4</span>
+          <div>
+            <h3>Review data and connections</h3>
+            <p>Review and correct SharePoint permissions before connecting a site as an agent knowledge source. Document each source, endpoint, connection identity, secret, third-party processor, and data-residency exception. Prefer user-context access and least-privilege identities. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint">SharePoint knowledge access &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">5</span>
+          <div>
+            <h3>Standardize build and test</h3>
+            <p>Require scoped instructions, approved tools, safe failure behavior, expected outcomes, abuse cases, a human or support path, and test evidence. Validate with limited users before production review. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-test-bot">Test your agent &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">6</span>
+          <div>
+            <h3>Promote through controlled ALM</h3>
+            <p>Package agents and dependencies in custom solutions. Use connection references and environment variables; promote the same version through dev, test, and prod with GCC-supported PAC CLI or Azure DevOps Build Tools. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-overview">Solutions and ALM &rsaquo;</a></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="phase" aria-labelledby="phase-operations">
+        <div class="phase-head">
+          <p class="phase-kicker">Phase 3 | Operations</p>
+          <h2 id="phase-operations">Publish and sustain</h2>
+        </div>
+        <article class="step">
+          <span class="step-number">7</span>
+          <div>
+            <h3>Gate sharing and publishing</h3>
+            <p>Separate Editor from Viewer access and share only with approved groups. Require owner, security/data, test, support, and funding approval. GCC organization-wide Teams and Microsoft 365 publication uses admin submission. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots">Share agents safely &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">8</span>
+          <div>
+            <h3>Monitor, retain, and respond</h3>
+            <p>For standalone agents, set transcript recording, download, retention, and viewer access; enable Dataverse auditing. For Microsoft 365 agents, use GCC-supported Purview controls. Document containment and rollback actions. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/admin-transcript-controls">Transcript controls &rsaquo;</a></p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">9</span>
+          <div>
+            <h3>Fund, meter, and review</h3>
+            <p>Choose prepaid, PAYG, or a hybrid based on demand and continuity. Assign a capacity owner and cost center by environment; configure overage routing, alerts, and per-agent limits where available. Review consumption monthly. <a class="step-link" href="https://learn.microsoft.com/power-platform/admin/manage-copilot-studio-messages-capacity">Manage credits and capacity &rsaquo;</a></p>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <section class="publish-gate" aria-labelledby="publish-gate-title">
+      <h2 id="publish-gate-title">Minimum production gate</h2>
+      <div class="gate-grid">
+        <span class="gate-item">Primary and backup owners</span>
+        <span class="gate-item">Approved audience and risk</span>
+        <span class="gate-item">Entra authentication</span>
+        <span class="gate-item">DLP policy passes</span>
+        <span class="gate-item">Versioned solution release</span>
+        <span class="gate-item">Security and UAT evidence</span>
+        <span class="gate-item">Support and incident path</span>
+        <span class="gate-item">Funding and limit decision</span>
+      </div>
+    </section>
+
+    <section class="billing" aria-labelledby="billing-title">
+      <div class="billing-head">
+        <h2 id="billing-title">Plan billing, capacity, and guardrails</h2>
+        <p>Choose the funding path and overage behavior before production use.</p>
+      </div>
+      <div class="billing-grid">
+        <article class="billing-card">
+          <h3>1. Choose the funding model</h3>
+          <p><strong>Prepaid packs</strong> provide a monthly tenant pool. <strong>PAYG</strong> bills consumed credits to Azure. A <strong>hybrid</strong> uses prepaid capacity first and PAYG for overage. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/billing-licensing">Licensing options &rsaquo;</a></p>
+        </article>
+        <article class="billing-card">
+          <h3>2. Allocate and route usage</h3>
+          <p>Assign prepaid credits from the tenant pool to environments. At exhaustion, choose whether an environment can draw from remaining tenant capacity, bill a linked PAYG plan, or have no fallback. <a class="step-link" href="https://learn.microsoft.com/power-platform/admin/manage-copilot-studio-messages-capacity">Capacity allocation &rsaquo;</a></p>
+        </article>
+        <article class="billing-card">
+          <h3>3. Decide how usage stops</h3>
+          <p>An environment allocation isn't an exact cap. With no fallback, prepaid usage enters overage and enforcement can disable agents; the monthly count resets rather than reducing the next allocation. PAYG continues billing until stopped. <a class="step-link" href="https://learn.microsoft.com/microsoft-copilot-studio/requirements-messages-management#overage-enforcement">Overage behavior &rsaquo;</a></p>
+        </article>
+      </div>
+      <p class="billing-note"><strong>Guardrails:</strong> Configure consumption notifications and monthly per-agent hard stops where available. Azure budgets provide cost alerts but don't stop PAYG usage. For agency chargeback, isolate workloads by environment and billing plan. Confirm PAYG and newer capacity controls in the target GCC tenant. <a class="step-link" href="https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets">Azure budgets &rsaquo;</a></p>
+    </section>
+
+    <ul class="resources" aria-label="Official Microsoft resources">
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing-gcc">GCC service description</a></li>
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/admin-data-loss-prevention">Agent data policies</a></li>
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/guidance/sec-gov-phase3">Security guidance</a></li>
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-overview">Solutions and ALM</a></li>
+      <li><a href="https://learn.microsoft.com/microsoft-copilot-studio/admin-transcript-controls">Transcript controls</a></li>
+      <li><a href="https://learn.microsoft.com/power-platform/admin/manage-copilot-studio-messages-capacity">Capacity controls</a></li>
+    </ul>
+
+    <p class="disclaimer"><strong>Reference baseline.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong> for GCC, not GCC High or DoD. Availability, licensing, release timing, and controls can vary by tenant and configuration. Validate conditional features in the target GCC tenant; official Microsoft terms and documentation control.</p>
+  </main>
+
+  <script>
+    (() => {
+      let previousTheme;
+      window.addEventListener("beforeprint", () => {
+        previousTheme = document.documentElement.getAttribute("data-theme");
+        document.documentElement.setAttribute("data-theme", "light");
+      });
+      window.addEventListener("afterprint", () => {
+        document.documentElement.setAttribute("data-theme", previousTheme || "light");
+      });
+    })();
+  </script>
+</body>
+</html>
