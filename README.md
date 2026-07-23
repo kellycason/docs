@@ -1,12 +1,24 @@
-# Power Platform Guides & Agent Skills
+# Power Platform Docs
 
-Shareable Power Platform reference guides, one-pagers, and reusable Agent Skills.
+Product-organized Power Platform reference guides, one-pagers, and reusable technical resources.
 
 **Landing hub:** https://kellycason.github.io/docs/
 
-## Agent Skills
+## Copilot Studio
 
-| Skill | Browse | Install |
+| Guide | Web page | PDF |
+| --- | --- | --- |
+| Copilot Studio Pricing & Licensing Options | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-pricing-options/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf) |
+| Copilot Studio Billing Configuration Guide | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-billing-configuration/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-billing-configuration/pdf/copilot-studio-billing-configuration.pdf) |
+| Copilot Studio Governance Baseline | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-governance/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-governance/pdf/copilot-studio-governance-baseline.pdf) |
+| Copilot Studio vs. Microsoft Foundry (GCC) | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf) |
+| Copilot Studio Decision Guide | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/pdf/copilot-studio-platform-strengths.pdf) |
+
+## Power Pages
+
+### Code Site Agent Skill
+
+| Resource | Browse | Install |
 | --- | --- | --- |
 | Power Pages Code Site | [Open package](skills/power-pages-code-site/) | [Download latest ZIP](https://github.com/kellycason/docs/releases/latest/download/power-pages-code-site.zip) |
 
@@ -28,16 +40,6 @@ Or install it globally at:
 
 See the [skill README](skills/power-pages-code-site/README.md) for installers,
 version pinning, updates, and example prompts.
-
-## One-Pagers
-
-| One-pager | Web page | PDF |
-| --- | --- | --- |
-| Copilot Studio Pricing & Licensing Options | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-pricing-options/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf) |
-| Copilot Studio Billing Configuration Guide | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-billing-configuration/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-billing-configuration/pdf/copilot-studio-billing-configuration.pdf) |
-| Copilot Studio Governance Baseline (GCC) | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-governance/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-governance/pdf/copilot-studio-governance-baseline.pdf) |
-| Copilot Studio vs. Microsoft Foundry (GCC) | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf) |
-| Copilot Studio Decision Guide | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/pdf/copilot-studio-platform-strengths.pdf) |
 
 ## Contributing
 

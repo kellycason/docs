@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Power Platform Guides &amp; Agent Skills</title>
+  <title>Power Platform Docs</title>
   <style>
     :root {
       --ms-bg: #ffffff;
@@ -33,6 +33,11 @@
     .eyebrow { margin: 0 0 6px; color: var(--ms-blue); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
     h1 { margin: 0; color: var(--ms-heading); font-size: 34px; font-weight: 700; }
     .lede { margin: 12px 0 32px; color: var(--ms-muted); font-size: 16px; max-width: 40em; }
+    .product-nav { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 34px; padding-bottom: 14px; border-bottom: 1px solid var(--ms-border); font-size: 14px; font-weight: 600; }
+    .product-section + .product-section { margin-top: 40px; }
+    .product-head { margin-bottom: 14px; }
+    .product-head h2 { margin: 0 0 4px; color: var(--ms-heading); font-size: 22px; }
+    .product-head p { margin: 0; color: var(--ms-muted); font-size: 14px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
     .card {
       position: relative;
@@ -67,39 +72,65 @@
       </svg>
       <span class="brand-name">Microsoft</span>
     </div>
-    <p class="eyebrow">Power Platform</p>
-    <h1>Guides &amp; Agent Skills</h1>
-    <p class="lede">Shareable reference guides and reusable skills that give coding agents field-tested Power Platform context.</p>
+    <p class="eyebrow">Microsoft Power Platform</p>
+    <h1>Power Platform Docs</h1>
+    <p class="lede">Product-organized reference guides, one-pagers, and reusable technical resources for the Power Platform community.</p>
 
-    <div class="grid">
-      <div class="card">
-        <h2><a href="https://github.com/kellycason/docs/tree/main/skills/power-pages-code-site">Power Pages Code Site Agent Skill</a></h2>
-        <p>Build, secure, deploy, and troubleshoot React/Vite Power Pages SPA sites with Dataverse, Server Logic, and SharePoint.</p>
-        <div class="links"><span class="view">View package &rsaquo;</span><a href="https://github.com/kellycason/docs/releases/latest/download/power-pages-code-site.zip">Download ZIP</a><a href="skills/power-pages-code-site/references/power-pages-code-site-scaffolding-guide.md">Guide</a></div>
+    <nav class="product-nav" aria-label="Product sections">
+      <a href="#copilot-studio">Copilot Studio</a>
+      <a href="#power-pages">Power Pages</a>
+    </nav>
+
+    <section class="product-section" id="copilot-studio">
+      <div class="product-head">
+        <h2>Copilot Studio</h2>
+        <p>Planning, governance, licensing, and platform-selection guidance for Microsoft Copilot Studio.</p>
       </div>
-      <div class="card">
-        <h2><a href="one-pagers/copilot-studio-pricing-options/">Pricing &amp; Licensing Options</a></h2>
-        <p>How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed.</p>
-        <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf">PDF</a></div>
+      <div class="grid">
+        <div class="card">
+          <h2><a href="one-pagers/copilot-studio-pricing-options/">Copilot Studio Pricing &amp; Licensing Options</a></h2>
+          <p>How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed.</p>
+          <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-pricing-options/pdf/copilot-studio-pricing-options.pdf">PDF</a></div>
+        </div>
+        <div class="card">
+          <h2><a href="one-pagers/copilot-studio-billing-configuration/">Copilot Studio Billing Configuration Guide</a></h2>
+          <p>How prepaid credits, tenant spillover, PAYG, overage enforcement, and Azure budget alerts work together.</p>
+          <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-billing-configuration/pdf/copilot-studio-billing-configuration.pdf">PDF</a></div>
+        </div>
+        <div class="card">
+          <h2><a href="one-pagers/copilot-studio-governance/">Copilot Studio Governance Baseline</a></h2>
+          <p>A GCC-focused plan for ownership, environments, data security, ALM, publishing, monitoring, and consumption controls.</p>
+          <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-governance/pdf/copilot-studio-governance-baseline.pdf">PDF</a></div>
+        </div>
+        <div class="card">
+          <h2><a href="one-pagers/copilot-studio-vs-foundry/">Copilot Studio vs. Microsoft Foundry</a></h2>
+          <p>When to use Copilot Studio or Microsoft Foundry to build AI agents &mdash; framed for US government (GCC).</p>
+          <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf">PDF</a></div>
+        </div>
       </div>
-      <div class="card">
-        <h2><a href="one-pagers/copilot-studio-billing-configuration/">Billing Configuration Guide</a></h2>
-        <p>How prepaid capacity, tenant spillover, PAYG, overage, alerts, and hard stops work together.</p>
-        <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-billing-configuration/pdf/copilot-studio-billing-configuration.pdf">PDF</a></div>
+    </section>
+
+    <section class="product-section" id="power-pages">
+      <div class="product-head">
+        <h2>Power Pages</h2>
+        <p>Technical resources for building and operating Power Pages code sites.</p>
       </div>
-      <div class="card">
-        <h2><a href="one-pagers/copilot-studio-governance/">Governance Baseline for GCC</a></h2>
-        <p>A sequenced plan for agent ownership, environments, data security, ALM, publishing, monitoring, and consumption controls.</p>
-        <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-governance/pdf/copilot-studio-governance-baseline.pdf">PDF</a></div>
+      <div class="grid">
+        <div class="card">
+          <h2><a href="https://github.com/kellycason/docs/tree/main/skills/power-pages-code-site">Power Pages Code Site Agent Skill</a></h2>
+          <p>Build, secure, deploy, and troubleshoot React/Vite Power Pages SPA sites with Dataverse, Server Logic, and SharePoint.</p>
+          <div class="links"><span class="view">View package &rsaquo;</span><a href="https://github.com/kellycason/docs/releases/latest/download/power-pages-code-site.zip">Download ZIP</a><a href="skills/power-pages-code-site/references/power-pages-code-site-scaffolding-guide.md">Guide</a></div>
+        </div>
       </div>
-      <div class="card">
-        <h2><a href="one-pagers/copilot-studio-vs-foundry/">Copilot Studio vs. Microsoft Foundry</a></h2>
-        <p>When to use Copilot Studio or Microsoft Foundry to build AI agents &mdash; framed for US government (GCC).</p>
-        <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf">PDF</a></div>
-      </div>
-    </div>
+    </section>
 
     <p class="foot">Community guidance under the MIT License. Product behavior and availability can change; confirm current details in official Microsoft documentation and your target environment.</p>
   </main>
+  <script>
+    document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
+  </script>
 </body>
 </html>

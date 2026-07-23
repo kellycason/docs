@@ -102,7 +102,7 @@
     .answer.partial { color: var(--cp-warning); }
 
     .controls { margin-top: 0.52rem; }
-    .control-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.36rem; }
+    .control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.36rem; }
     .control {
       min-height: 0.58in;
       padding: 0.34rem 0.4rem;
@@ -111,12 +111,6 @@
     }
     .control h3 { margin: 0 0 0.1rem; font-size: 0.65rem; }
     .control p { margin: 0; color: var(--cp-text-muted); font-size: 0.57rem; line-height: 1.27; }
-
-    .patterns { margin-top: 0.5rem; }
-    .pattern-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.34rem; }
-    .pattern { padding: 0.32rem 0.38rem; border: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
-    .pattern strong { display: block; margin-bottom: 0.08rem; color: var(--cp-text); font-size: 0.63rem; }
-    .pattern span { display: block; color: var(--cp-text-muted); font-size: 0.56rem; line-height: 1.25; }
 
     .resources { display: flex; flex-wrap: wrap; gap: 0.08rem 0.5rem; margin: 0.45rem 0 0; padding: 0; list-style: none; font-size: 0.59rem; line-height: 1.3; }
     .resources li:not(:last-child)::after { content: "\00b7"; margin-left: 0.5rem; color: var(--cp-border-strong); }
@@ -135,11 +129,10 @@
       .comparison { min-width: 48rem; }
       .table-scroll { overflow-x: auto; }
       .control-grid { grid-template-columns: 1fr 1fr; }
-      .pattern-grid { grid-template-columns: 1fr 1fr; }
     }
     @media screen and (max-width: 480px) {
       .callout { grid-template-columns: 1fr; gap: 0.2rem; }
-      .control-grid, .pattern-grid { grid-template-columns: 1fr; }
+      .control-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -163,14 +156,14 @@
           Download PDF
         </a>
       </div>
-      <p class="eyebrow">Billing Configuration Guide | GCC Planning</p>
-      <h1>Choose how agent usage is funded and controlled</h1>
+      <p class="eyebrow">Microsoft Copilot Studio | GCC Planning</p>
+      <h1>Copilot Studio Billing Configuration Guide</h1>
       <p class="subtitle">Compare prepaid capacity, tenant spillover, pay-as-you-go, and Microsoft 365 Copilot inclusion &mdash; then decide how each environment should behave when usage exceeds its plan.</p>
     </header>
 
     <section class="callout" aria-label="Billing principle">
       <strong>Know the difference</strong>
-      <p><b>Capacity allocation</b> assigns a budget, <b>Azure budgets</b> send alerts, and <b>per-agent limits</b> can stop usage. These are separate controls.</p>
+      <p><b>Capacity allocation</b> assigns prepaid credits to an environment. <b>Spillover settings</b> determine which capacity source can be used next. <b>Azure budgets</b> notify you about PAYG cost but don't stop consumption.</p>
     </section>
 
     <section aria-labelledby="comparison-title">
@@ -181,53 +174,46 @@
             <tr>
               <th class="col-config">Configuration</th>
               <th class="col-source">How capacity is assigned</th>
-              <th class="col-over">When planned capacity is used</th>
+              <th class="col-over">How ongoing usage is handled</th>
               <th class="col-azure">Azure charge?</th>
-              <th class="col-stop">Hard stop?</th>
+              <th class="col-stop">Stop / alert behavior</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Prepaid only<br>No fallback</td>
               <td>Tenant-pooled credits are allocated to the environment.</td>
-              <td>Enters overage with no PAYG path. Custom agents can continue during the enforcement grace period and may later be disabled. Monthly usage resets; overage isn't deducted from the next allocation.</td>
+              <td>For general custom-agent usage, Microsoft documents enforcement when the tenant reaches 125% of prepaid capacity. An active conversation can finish; affected agents are then disabled until capacity is added or reset. Agent flows are enforced separately when prepaid capacity is exhausted.</td>
               <td><span class="answer no">No</span></td>
-              <td><span class="answer partial">Not exact</span>Not at the environment allocation.</td>
+              <td><span class="answer partial">Prepaid enforcement</span>Automatic at documented tenant thresholds, not at the environment allocation.</td>
             </tr>
             <tr>
               <td>Prepaid +<br>Tenant spillover</td>
               <td>Environment allocation plus available tenant prepaid capacity.</td>
-              <td>Draws from the remaining tenant pool after its allocation. This can consume capacity that might otherwise serve other agencies.</td>
+              <td>Draws from the remaining tenant pool after its allocation. This reduces capacity otherwise available to other environments. Prepaid enforcement applies when the relevant shared capacity reaches its documented thresholds.</td>
               <td><span class="answer no">No</span></td>
-              <td><span class="answer partial">Not exact</span>Prepaid enforcement applies after capacity is exhausted.</td>
+              <td><span class="answer partial">Prepaid enforcement</span>Automatic at documented tenant thresholds; agent flows are handled separately.</td>
             </tr>
             <tr>
               <td>PAYG only</td>
-              <td>The environment is linked to an Azure billing plan.</td>
-              <td>Every billable Copilot Credit is metered to Azure. Usage continues until the agent or billing path is stopped, or an applicable agent limit is reached.</td>
+              <td>If available in the target GCC tenant, the environment is linked to an Azure billing plan.</td>
+              <td>While linked, billable Copilot Credits are metered to Azure. Removing PAYG stops future Azure charges but doesn't turn off the agent; continued operation depends on another entitlement or capacity path.</td>
               <td><span class="answer yes">Yes</span>All billable usage.</td>
-              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
+              <td><span class="answer partial">Cost alerts only</span>Azure budgets don't stop usage. Turn off the agent to stop agent activity.</td>
             </tr>
             <tr>
               <td>Prepaid +<br>PAYG overage</td>
-              <td>Prepaid allocation first; linked Azure plan covers overage.</td>
-              <td>Additional usage is billed to Azure after prepaid capacity is consumed, preserving service continuity.</td>
+              <td>If available and configured in the target GCC tenant, prepaid allocation is used first and a linked Azure plan covers overage.</td>
+              <td>Additional usage is billed to Azure after prepaid capacity is consumed. Removing PAYG stops future Azure charges but doesn't itself turn off the agent.</td>
               <td><span class="answer yes">Yes</span>Overage only.</td>
-              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
-            </tr>
-            <tr>
-              <td>Prepaid +<br>Both fallbacks</td>
-              <td>Environment allocation, tenant capacity, and linked PAYG.</td>
-              <td>Both tenant capacity and PAYG can cover overage. Public documentation doesn't state a guaranteed priority. This is the least strict agency allocation.</td>
-              <td><span class="answer yes">Partial</span>PAYG-billed usage.</td>
-              <td><span class="answer partial">Agent level</span>No aggregate environment cap.</td>
+              <td><span class="answer partial">Cost alerts only</span>Azure budgets don't stop PAYG. Turn off the agent to stop agent activity.</td>
             </tr>
             <tr>
               <td>Microsoft 365 Copilot inclusion</td>
-              <td>Qualifying employee-facing usage is included for an authenticated licensed user.</td>
-              <td>Included usage is zero-rated. Nonincluded scenarios use the configured prepaid or PAYG path. Fair-use and service limits still apply.</td>
+              <td>Employee-facing usage is included when the user has a Microsoft 365 Copilot license and the agent operates using that authenticated user's identity.</td>
+              <td>Fair-use limits apply. Agent-flow inclusion applies only to <b>When an agent calls the flow</b>; computer-using agents are excluded. Nonincluded scenarios use the configured credit path.</td>
               <td><span class="answer partial">Depends</span>On the scenario.</td>
-              <td><span class="answer partial">Service limits</span>Not a budget cap.</td>
+              <td><span class="answer partial">Fair-use terms</span>Not an organizational spending control.</td>
             </tr>
           </tbody>
         </table>
@@ -237,22 +223,11 @@
     <section class="controls" aria-labelledby="controls-title">
       <h2 id="controls-title">What each control actually does</h2>
       <div class="control-grid">
-        <article class="control"><h3>Environment allocation</h3><p>Assigns a planned share of prepaid tenant capacity. It isn't an exact hard stop.</p></article>
+        <article class="control"><h3>Environment allocation</h3><p>Assigns prepaid credits from the tenant pool to an environment.</p></article>
         <article class="control"><h3>Draw from tenant</h3><p>Lets an environment use available shared prepaid credits after its allocation.</p></article>
         <article class="control"><h3>Bill to PAYG</h3><p>Sends applicable usage or overage to the linked Azure subscription.</p></article>
         <article class="control"><h3>Azure budget</h3><p>Sends actual or forecasted cost alerts. It doesn't stop agents or PAYG consumption.</p></article>
-        <article class="control"><h3>Per-agent monthly limit</h3><p>Can notify admins and automatically turn off that agent at its limit, where available.</p></article>
-        <article class="control"><h3>Disable or disconnect</h3><p>Stops the agent or removes the PAYG path; another valid capacity path might be required.</p></article>
-      </div>
-    </section>
-
-    <section class="patterns" aria-labelledby="patterns-title">
-      <h2 id="patterns-title">Recommended agency patterns</h2>
-      <div class="pattern-grid">
-        <div class="pattern"><strong>Strict control</strong><span>Prepaid, no tenant spillover, plus per-agent limits.</span></div>
-        <div class="pattern"><strong>Shared central pool</strong><span>Prepaid with tenant spillover and close monitoring.</span></div>
-        <div class="pattern"><strong>Clean chargeback</strong><span>One PAYG billing plan per agency and its environments.</span></div>
-        <div class="pattern"><strong>Business continuity</strong><span>Prepaid baseline, agency PAYG overage, alerts, and agent limits.</span></div>
+        <article class="control"><h3>Disable or disconnect</h3><p>Turning off the agent stops activity. Removing PAYG stops future Azure charges but doesn't itself turn off the agent.</p></article>
       </div>
     </section>
 
@@ -264,7 +239,7 @@
       <li><a href="https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets">Azure budgets</a></li>
     </ul>
 
-    <p class="disclaimer"><strong>Reference only.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong>. Confirm pricing, licensing, PAYG availability, overage routing, reporting, and per-agent limit controls in the target GCC tenant and Microsoft agreement. Official Microsoft terms and documentation control.</p>
+    <p class="disclaimer"><strong>Reference only.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong>. Confirm pricing, licensing, PAYG availability, overage routing, and reporting in the target GCC tenant and Microsoft agreement. Official Microsoft terms and documentation control.</p>
   </main>
   <script>
     document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {
