@@ -4,66 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Copilot Studio Governance Baseline for GCC</title>
-  <script>
-    (() => {
-      const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
   <style>
     :root {
-      color-scheme: light;
-      --cp-bg: #f7f4ef;
-      --cp-bg-elevated: #fcfbf8;
+      --cp-bg: #f5f5f5;
+      --cp-bg-elevated: #ffffff;
       --cp-surface: #ffffff;
       --cp-surface-soft: #f5f5f5;
-      --cp-border: #dedede;
-      --cp-border-strong: #919191;
+      --cp-border: #e1dfdd;
+      --cp-border-strong: #c8c6c4;
       --cp-text: #242424;
-      --cp-text-muted: #5c5c5c;
-      --cp-text-soft: #6f6f6f;
-      --cp-accent: #b11f4b;
-      --cp-accent-hover: #9a1a41;
-      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-text-muted: #605e5c;
+      --cp-text-soft: #605e5c;
+      --cp-accent: #0067b8;
+      --cp-accent-hover: #005a9e;
+      --cp-accent-soft: #eff6fc;
       --cp-accent-fg: #ffffff;
-      --cp-success: #16a34a;
-      --cp-danger: #dc2626;
-      --cp-warning: #f59e0b;
-      --cp-link: #0078d4;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-      --cp-overlay: rgba(255, 255, 255, 0.8);
-      --cp-panel: rgba(255, 255, 255, 0.86);
-      --cp-panel-strong: rgba(255, 255, 255, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.55);
-      --cp-highlight: rgba(177, 31, 75, 0.12);
-    }
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --cp-bg: #3d3b3a;
-      --cp-bg-elevated: #343231;
-      --cp-surface: #292929;
-      --cp-surface-soft: #2e2e2e;
-      --cp-border: #474747;
-      --cp-border-strong: #5f5f5f;
-      --cp-text: #dedede;
-      --cp-text-muted: #919191;
-      --cp-text-soft: #b0b0b0;
-      --cp-accent: #fd8ea1;
-      --cp-accent-hover: #fb7b91;
-      --cp-accent-soft: rgba(253, 142, 161, 0.14);
-      --cp-accent-fg: #1a1a1a;
-      --cp-success: #4ade80;
-      --cp-danger: #f87171;
-      --cp-warning: #fbbf24;
-      --cp-link: #4da6ff;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-      --cp-overlay: rgba(41, 41, 41, 0.88);
-      --cp-panel: rgba(41, 41, 41, 0.72);
-      --cp-panel-strong: rgba(41, 41, 41, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.04);
-      --cp-highlight: rgba(253, 142, 161, 0.12);
+      --cp-success: #107c10;
+      --cp-warning: #8a6d00;
+      --cp-link: #0067b8;
+      --cp-shadow: 0 2px 10px rgba(0, 0, 0, 0.10), 0 0 1px rgba(0, 0, 0, 0.15);
     }
 
     * { box-sizing: border-box; }
@@ -71,10 +30,8 @@
     body {
       margin: 0;
       color: var(--cp-text);
-      background:
-        linear-gradient(var(--cp-highlight), var(--cp-highlight)) top left / 100% 0.3rem no-repeat,
-        var(--cp-bg);
-      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cp-bg);
+      font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
       font-size: 0.875rem;
       line-height: 1.4;
       letter-spacing: 0;
@@ -87,8 +44,7 @@
       width: 8.5in;
       min-height: 11in;
       margin: 1.5rem auto;
-      padding: 0.3in 0.4in 0.24in;
-      border: 1px solid var(--cp-border);
+      padding: 0.32in 0.46in 0.24in;
       background: var(--cp-surface);
       box-shadow: var(--cp-shadow);
     }
@@ -107,10 +63,10 @@
       align-items: center;
       gap: 0.5rem;
       color: var(--cp-text-muted);
-      font-size: 1.05rem;
-      font-weight: 650;
+      font-size: 1.18rem;
+      font-weight: 600;
     }
-    .brand-mark { width: 1.2rem; height: 1.2rem; color: var(--cp-accent); }
+    .brand-mark { width: 1.31rem; height: 1.31rem; }
     .pdf-btn {
       display: inline-flex;
       align-items: center;
@@ -118,7 +74,7 @@
       min-height: 2rem;
       padding: 0.4rem 0.75rem;
       border: 1px solid var(--cp-accent);
-      border-radius: 0.625rem;
+      border-radius: 0.25rem;
       background: var(--cp-accent);
       color: var(--cp-accent-fg);
       font-size: 0.75rem;
@@ -171,9 +127,11 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.65rem;
-      align-items: start;
+      align-items: stretch;
     }
     .phase {
+      display: grid;
+      grid-template-rows: 0.52in repeat(3, minmax(0, 1fr));
       min-width: 0;
       border-top: 0.18rem solid var(--cp-accent);
       background: var(--cp-surface-soft);
@@ -191,7 +149,7 @@
       display: grid;
       grid-template-columns: 1.55rem 1fr;
       gap: 0.45rem;
-      min-height: 1.22in;
+      min-height: 0;
       padding: 0.48rem 0.55rem;
       border-top: 1px solid var(--cp-border);
       background: var(--cp-surface);
@@ -302,21 +260,21 @@
 
     @page { size: letter portrait; margin: 0; }
     @media print {
-      html, body { background: var(--cp-surface); }
+      html, body { background: #ffffff; }
       .page {
         width: 8.5in;
         height: 11in;
         min-height: 11in;
         margin: 0;
         overflow: hidden;
-        border: 0;
         box-shadow: none;
       }
       .web-only { display: none !important; }
     }
     @media screen and (max-width: 820px) {
-      .page { width: 100%; min-height: 0; margin: 0; padding: 1.25rem; border: 0; box-shadow: none; }
+      .page { width: 100%; min-height: 0; margin: 0; padding: 1.5rem; box-shadow: none; }
       .roadmap { grid-template-columns: 1fr; }
+      .phase { display: block; }
       .step { min-height: 0; }
       .gate-grid { grid-template-columns: 1fr 1fr; }
       .billing-head { display: block; }
@@ -335,14 +293,14 @@
   <main class="page" aria-label="Copilot Studio governance baseline for GCC">
     <header class="hero">
       <div class="hero-top">
-        <div class="brand" aria-label="Microsoft Copilot Studio">
-          <svg class="brand-mark" viewBox="0 0 20 20" role="img" aria-hidden="true">
-            <rect x="1" y="1" width="8" height="8" fill="currentColor"></rect>
-            <rect x="11" y="1" width="8" height="8" fill="currentColor"></rect>
-            <rect x="1" y="11" width="8" height="8" fill="currentColor"></rect>
-            <rect x="11" y="11" width="8" height="8" fill="currentColor"></rect>
+        <div class="brand" aria-label="Microsoft">
+          <svg class="brand-mark" viewBox="0 0 21 21" role="img" aria-hidden="true">
+            <rect x="0" y="0" width="10" height="10" fill="#F25022"></rect>
+            <rect x="11" y="0" width="10" height="10" fill="#7FBA00"></rect>
+            <rect x="0" y="11" width="10" height="10" fill="#00A4EF"></rect>
+            <rect x="11" y="11" width="10" height="10" fill="#FFB900"></rect>
           </svg>
-          <span>Microsoft Copilot Studio</span>
+          <span>Microsoft</span>
         </div>
         <a class="pdf-btn web-only" href="pdf/copilot-studio-governance-baseline.pdf">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -495,17 +453,5 @@
     <p class="disclaimer"><strong>Reference baseline.</strong> Based on public Microsoft documentation as of <strong>July 23, 2026</strong> for GCC, not GCC High or DoD. Availability, licensing, release timing, and controls can vary by tenant and configuration. Validate conditional features in the target GCC tenant; official Microsoft terms and documentation control.</p>
   </main>
 
-  <script>
-    (() => {
-      let previousTheme;
-      window.addEventListener("beforeprint", () => {
-        previousTheme = document.documentElement.getAttribute("data-theme");
-        document.documentElement.setAttribute("data-theme", "light");
-      });
-      window.addEventListener("afterprint", () => {
-        document.documentElement.setAttribute("data-theme", previousTheme || "light");
-      });
-    })();
-  </script>
 </body>
 </html>
