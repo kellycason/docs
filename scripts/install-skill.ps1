@@ -1,5 +1,8 @@
 [CmdletBinding()]
 param(
+    [ValidateSet('power-pages-code-site', 'power-platform-code-apps')]
+    [string]$Skill = 'power-pages-code-site',
+
     [ValidateSet('Workspace', 'Global')]
     [string]$Scope = 'Workspace',
 
@@ -11,15 +14,20 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$skillName = 'power-pages-code-site'
+$skillName = $Skill
 $assetName = "$skillName.zip"
+$expectedGuide = if ($skillName -eq 'power-pages-code-site') {
+    'references\power-pages-code-site-scaffolding-guide.md'
+} else {
+    'references\power-platform-code-apps-field-guide.md'
+}
 
 if ($Version -eq 'latest') {
     $downloadUrl = "https://github.com/kellycason/docs/releases/latest/download/$assetName"
-} elseif ($Version -match '^power-pages-code-site-v\d+\.\d+\.\d+$') {
+} elseif ($Version -match ('^' + [regex]::Escape($skillName) + '-v\d+\.\d+\.\d+$')) {
     $downloadUrl = "https://github.com/kellycason/docs/releases/download/$Version/$assetName"
 } else {
-    throw "Version must be 'latest' or a tag such as power-pages-code-site-v1.0.0."
+    throw "Version must be 'latest' or a tag such as $skillName-v1.0.0."
 }
 
 $skillsRoot = if ($Scope -eq 'Global') {
@@ -33,7 +41,7 @@ if ((Test-Path $target) -and -not $Force) {
     throw "The skill already exists at '$target'. Rerun with -Force to update it."
 }
 
-$temporaryRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("power-pages-skill-" + [guid]::NewGuid())
+$temporaryRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("power-platform-skill-" + [guid]::NewGuid())
 $archivePath = Join-Path $temporaryRoot $assetName
 $extractPath = Join-Path $temporaryRoot 'extract'
 $stagingPath = "$target.installing-$PID"
@@ -61,7 +69,7 @@ try {
     Copy-Item $source $stagingPath -Recurse -Force
 
     if (-not (Test-Path (Join-Path $stagingPath 'SKILL.md')) -or
-        -not (Test-Path (Join-Path $stagingPath 'references\power-pages-code-site-scaffolding-guide.md'))) {
+        -not (Test-Path (Join-Path $stagingPath $expectedGuide))) {
         throw 'The staged skill failed package validation.'
     }
 

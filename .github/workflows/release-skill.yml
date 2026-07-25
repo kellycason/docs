@@ -1,9 +1,10 @@
-name: Release Power Pages skill
+name: Release agent skill
 
 on:
   push:
     tags:
       - power-pages-code-site-v*
+      - power-platform-code-apps-v*
 
 permissions:
   contents: write
@@ -22,8 +23,13 @@ jobs:
         shell: bash
         run: |
           node scripts/validate-skill.mjs
-          version="$(tr -d '[:space:]' < skills/power-pages-code-site/VERSION)"
-          expected="power-pages-code-site-v${version}"
+          case "${GITHUB_REF_NAME}" in
+            power-pages-code-site-v*) skill="power-pages-code-site" ;;
+            power-platform-code-apps-v*) skill="power-platform-code-apps" ;;
+            *) echo "Unsupported skill tag ${GITHUB_REF_NAME}." >&2; exit 1 ;;
+          esac
+          version="$(tr -d '[:space:]' < "skills/${skill}/VERSION")"
+          expected="${skill}-v${version}"
           if [[ "${GITHUB_REF_NAME}" != "${expected}" ]]; then
             echo "Tag ${GITHUB_REF_NAME} does not match VERSION ${version}." >&2
             exit 1
@@ -33,12 +39,18 @@ jobs:
         shell: bash
         run: |
           mkdir -p release
-          cp -R skills/power-pages-code-site release/power-pages-code-site
-          cd release
-          zip -r ../power-pages-code-site.zip power-pages-code-site
+          for skill in power-pages-code-site power-platform-code-apps; do
+            cp -R "skills/${skill}" "release/${skill}"
+            (
+              cd release
+              zip -r "../${skill}.zip" "${skill}"
+            )
+          done
 
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: power-pages-code-site.zip
+          files: |
+            power-pages-code-site.zip
+            power-platform-code-apps.zip
           generate_release_notes: true

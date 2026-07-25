@@ -30,7 +30,7 @@ Use explicit placeholders such as `<environment-url>`, `<website-id>`,
 
 ## Updating The Skill
 
-1. Edit the canonical files under `skills/power-pages-code-site/`.
+1. Edit the canonical files under the applicable `skills/<skill-name>/` folder.
 2. Keep `SKILL.md` compact. Put detailed knowledge in `references/`.
 3. Run `node scripts/validate-skill.mjs`.
 4. Update `CHANGELOG.md`.
@@ -46,8 +46,15 @@ Use explicit placeholders such as `<environment-url>`, `<website-id>`,
 After merging, create and push the matching tag:
 
 ```text
-power-pages-code-site-v<version>
+<skill-name>-v<version>
 ```
 
-The release workflow validates the package and publishes
-`power-pages-code-site.zip`.
+Supported release tags are currently:
+
+```text
+power-pages-code-site-v<version>
+power-platform-code-apps-v<version>
+```
+
+The release workflow validates every skill and publishes both ZIP packages so
+the landing page's latest-release links remain valid.

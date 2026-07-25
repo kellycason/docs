@@ -6,10 +6,13 @@ version="latest"
 workspace="$(pwd)"
 force="false"
 skill_name="power-pages-code-site"
-asset_name="${skill_name}.zip"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --skill)
+      skill_name="${2:-}"
+      shift 2
+      ;;
     --scope)
       scope="${2:-}"
       shift 2
@@ -33,6 +36,18 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [[ "$skill_name" != "power-pages-code-site" && "$skill_name" != "power-platform-code-apps" ]]; then
+  echo "--skill must be power-pages-code-site or power-platform-code-apps" >&2
+  exit 2
+fi
+
+asset_name="${skill_name}.zip"
+if [[ "$skill_name" == "power-pages-code-site" ]]; then
+  expected_guide="references/power-pages-code-site-scaffolding-guide.md"
+else
+  expected_guide="references/power-platform-code-apps-field-guide.md"
+fi
+
 if [[ "$scope" != "workspace" && "$scope" != "global" ]]; then
   echo "--scope must be workspace or global" >&2
   exit 2
@@ -40,10 +55,10 @@ fi
 
 if [[ "$version" == "latest" ]]; then
   download_url="https://github.com/kellycason/docs/releases/latest/download/${asset_name}"
-elif [[ "$version" =~ ^power-pages-code-site-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+elif [[ "$version" =~ ^${skill_name}-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   download_url="https://github.com/kellycason/docs/releases/download/${version}/${asset_name}"
 else
-  echo "--version must be latest or a tag such as power-pages-code-site-v1.0.0" >&2
+  echo "--version must be latest or a tag such as ${skill_name}-v1.0.0" >&2
   exit 2
 fi
 
@@ -83,7 +98,7 @@ fi
 mkdir -p "$skills_root"
 cp -R "$source_path" "$staging_path"
 
-if [[ ! -f "${staging_path}/SKILL.md" || ! -f "${staging_path}/references/power-pages-code-site-scaffolding-guide.md" ]]; then
+if [[ ! -f "${staging_path}/SKILL.md" || ! -f "${staging_path}/${expected_guide}" ]]; then
   echo "The staged skill failed package validation." >&2
   exit 1
 fi

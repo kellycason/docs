@@ -41,6 +41,34 @@ Or install it globally at:
 See the [skill README](skills/power-pages-code-site/README.md) for installers,
 version pinning, updates, and example prompts.
 
+## Code Apps
+
+### Power Apps Code Apps Agent Skill
+
+| Resource | Browse | Install |
+| --- | --- | --- |
+| Power Platform Code Apps | [Open package](skills/power-platform-code-apps/) | [Download latest ZIP](https://github.com/kellycason/docs/releases/latest/download/power-platform-code-apps.zip) |
+
+The Code Apps skill helps coding agents scaffold, authenticate, connect,
+deploy, debug, and validate React/Vite Power Apps code apps hosted on Power
+Platform. It covers Dataverse, generated TypeScript services, file columns,
+connectors, Copilot Studio, GCC/sovereign targeting, and ALM.
+
+Install it in one workspace at:
+
+```text
+.github/skills/power-platform-code-apps/
+```
+
+Or install it globally at:
+
+```text
+~/.copilot/skills/power-platform-code-apps/
+```
+
+See the [skill README](skills/power-platform-code-apps/README.md) for installers,
+version pinning, updates, and example prompts.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Reusable guidance must be grounded in
