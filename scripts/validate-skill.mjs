@@ -28,6 +28,25 @@ const skills = [
       'connection references',
     ],
   },
+  {
+    name: 'copilot-studio-agent-engineering',
+    guides: [
+      'references/baseline-gap-analysis.md',
+      'references/identity-and-authoring.md',
+      'references/grounding-and-capabilities.md',
+      'references/routing-and-dialogs.md',
+      'references/lifecycle-and-tests.md',
+      'references/hr-benefits-case-study.md',
+    ],
+    requiredTerms: [
+      'FileGroupKnowledgeSource',
+      'CreateSearchQuery',
+      'SearchAndSummarizeContent',
+      'CancelOtherTopics',
+      'EndConversation',
+      '.mcs/botdefinition.json',
+    ],
+  },
 ]
 
 function fail(message) {
@@ -64,9 +83,11 @@ const summaries = []
 for (const definition of skills) {
   const skillRoot = path.join(root, 'skills', definition.name)
   const skillFile = path.join(skillRoot, 'SKILL.md')
-  const guideFile = path.join(skillRoot, definition.guide)
+  const guidePaths = definition.guides || [definition.guide]
+  const guideFiles = guidePaths.map((guide) => path.join(skillRoot, guide))
   const skill = await readFile(skillFile, 'utf8')
-  const guide = await readFile(guideFile, 'utf8')
+  const guides = await Promise.all(guideFiles.map((guideFile) => readFile(guideFile, 'utf8')))
+  const guide = guides.join('\n')
   const version = (await readFile(path.join(skillRoot, 'VERSION'), 'utf8')).trim()
   const changelog = await readFile(path.join(skillRoot, 'CHANGELOG.md'), 'utf8')
   const frontmatter = parseFrontmatter(skill)
@@ -81,9 +102,11 @@ for (const definition of skills) {
 
   if (!/^\d+\.\d+\.\d+$/.test(version)) fail(`${definition.name}: VERSION must contain a semantic version.`)
   if (!changelog.includes(`## ${version} -`)) fail(`${definition.name}: CHANGELOG.md has no entry for ${version}.`)
-  if (!skill.includes(`./${definition.guide}`)) fail(`${definition.name}: SKILL.md must link to its guide with a relative path.`)
+  for (const guidePath of guidePaths) {
+    if (!skill.includes(`./${guidePath}`)) fail(`${definition.name}: SKILL.md must link to ${guidePath} with a relative path.`)
+  }
 
-  for (const [label, text] of [['SKILL.md', skill], ['guide', guide]]) {
+  for (const [label, text] of [['SKILL.md', skill], ...guides.map((text, index) => [guidePaths[index], text])]) {
     const fences = (text.match(/^```/gm) || []).length
     if (fences % 2 !== 0) fail(`${definition.name}: ${label} has unbalanced Markdown code fences.`)
   }
@@ -93,7 +116,11 @@ for (const definition of skills) {
     if ((await stat(file)).size > 2 * 1024 * 1024) fail(`${path.relative(root, file)} exceeds 2 MiB.`)
   }
 
-  const publicText = `${skill}\n${guide}`
+  const publicTextFiles = packageFiles.filter((file) => {
+    const extension = path.extname(file).toLowerCase()
+    return ['.md', '.yml', '.yaml', '.json', '.txt'].includes(extension) || path.basename(file) === 'VERSION'
+  })
+  const publicText = (await Promise.all(publicTextFiles.map((file) => readFile(file, 'utf8')))).join('\n')
   const privacyText = publicText.replaceAll('@odata.bind', '')
   const privacyPatterns = [
     ['email address', /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i],

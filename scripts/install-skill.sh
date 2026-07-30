@@ -36,17 +36,23 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ "$skill_name" != "power-pages-code-site" && "$skill_name" != "power-platform-code-apps" ]]; then
-  echo "--skill must be power-pages-code-site or power-platform-code-apps" >&2
+if [[ "$skill_name" != "power-pages-code-site" && "$skill_name" != "power-platform-code-apps" && "$skill_name" != "copilot-studio-agent-engineering" ]]; then
+  echo "--skill must be power-pages-code-site, power-platform-code-apps, or copilot-studio-agent-engineering" >&2
   exit 2
 fi
 
 asset_name="${skill_name}.zip"
-if [[ "$skill_name" == "power-pages-code-site" ]]; then
-  expected_guide="references/power-pages-code-site-scaffolding-guide.md"
-else
-  expected_guide="references/power-platform-code-apps-field-guide.md"
-fi
+case "$skill_name" in
+  power-pages-code-site)
+    expected_guide="references/power-pages-code-site-scaffolding-guide.md"
+    ;;
+  power-platform-code-apps)
+    expected_guide="references/power-platform-code-apps-field-guide.md"
+    ;;
+  copilot-studio-agent-engineering)
+    expected_guide="references/lifecycle-and-tests.md"
+    ;;
+esac
 
 if [[ "$scope" != "workspace" && "$scope" != "global" ]]; then
   echo "--scope must be workspace or global" >&2

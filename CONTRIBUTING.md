@@ -54,7 +54,8 @@ Supported release tags are currently:
 ```text
 power-pages-code-site-v<version>
 power-platform-code-apps-v<version>
+copilot-studio-agent-engineering-v<version>
 ```
 
-The release workflow validates every skill and publishes both ZIP packages so
+The release workflow validates every skill and publishes all ZIP packages so
 the landing page's latest-release links remain valid.

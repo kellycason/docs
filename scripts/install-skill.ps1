@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('power-pages-code-site', 'power-platform-code-apps')]
+    [ValidateSet('power-pages-code-site', 'power-platform-code-apps', 'copilot-studio-agent-engineering')]
     [string]$Skill = 'power-pages-code-site',
 
     [ValidateSet('Workspace', 'Global')]
@@ -16,10 +16,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $skillName = $Skill
 $assetName = "$skillName.zip"
-$expectedGuide = if ($skillName -eq 'power-pages-code-site') {
-    'references\power-pages-code-site-scaffolding-guide.md'
-} else {
-    'references\power-platform-code-apps-field-guide.md'
+$expectedGuide = switch ($skillName) {
+    'power-pages-code-site' { 'references\power-pages-code-site-scaffolding-guide.md' }
+    'power-platform-code-apps' { 'references\power-platform-code-apps-field-guide.md' }
+    'copilot-studio-agent-engineering' { 'references\lifecycle-and-tests.md' }
 }
 
 if ($Version -eq 'latest') {

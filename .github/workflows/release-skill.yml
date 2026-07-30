@@ -5,6 +5,7 @@ on:
     tags:
       - power-pages-code-site-v*
       - power-platform-code-apps-v*
+      - copilot-studio-agent-engineering-v*
 
 permissions:
   contents: write
@@ -26,6 +27,7 @@ jobs:
           case "${GITHUB_REF_NAME}" in
             power-pages-code-site-v*) skill="power-pages-code-site" ;;
             power-platform-code-apps-v*) skill="power-platform-code-apps" ;;
+            copilot-studio-agent-engineering-v*) skill="copilot-studio-agent-engineering" ;;
             *) echo "Unsupported skill tag ${GITHUB_REF_NAME}." >&2; exit 1 ;;
           esac
           version="$(tr -d '[:space:]' < "skills/${skill}/VERSION")"
@@ -39,7 +41,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p release
-          for skill in power-pages-code-site power-platform-code-apps; do
+          for skill in power-pages-code-site power-platform-code-apps copilot-studio-agent-engineering; do
             cp -R "skills/${skill}" "release/${skill}"
             (
               cd release
@@ -53,4 +55,5 @@ jobs:
           files: |
             power-pages-code-site.zip
             power-platform-code-apps.zip
+            copilot-studio-agent-engineering.zip
           generate_release_notes: true

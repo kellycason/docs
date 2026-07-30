@@ -14,6 +14,33 @@ Product-organized Power Platform reference guides, one-pagers, and reusable tech
 | Copilot Studio vs. Microsoft Foundry (GCC) | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf) |
 | Copilot Studio Decision Guide | [Open](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/) | [Download](https://kellycason.github.io/docs/one-pagers/copilot-studio-platform-strengths/pdf/copilot-studio-platform-strengths.pdf) |
 
+### Agent Engineering Skill
+
+| Resource | Browse | Install |
+| --- | --- | --- |
+| Copilot Studio Agent Engineering | [Open package](skills/copilot-studio-agent-engineering/) | [Download latest ZIP](https://github.com/kellycason/docs/releases/latest/download/copilot-studio-agent-engineering.zip) |
+
+The Copilot Studio skill helps coding agents preserve YAML identities, ground
+answers in actual source material, audit trigger and dialog behavior, validate
+drafts, and distinguish authoring success from runtime correctness.
+
+Short link: https://kellycason.github.io/docs/#copilot-studio-agent-engineering
+
+Install it in one workspace at:
+
+```text
+.github/skills/copilot-studio-agent-engineering/
+```
+
+Or install it globally at:
+
+```text
+~/.copilot/skills/copilot-studio-agent-engineering/
+```
+
+See the [skill README](skills/copilot-studio-agent-engineering/README.md) for
+installers, version pinning, updates, and example prompts.
+
 ## Power Pages
 
 ### Code Site Agent Skill
