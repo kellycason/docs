@@ -4,7 +4,7 @@ Reusable engineering guidance for building, editing, grounding, validating,
 syncing, and testing Microsoft Copilot Studio YAML agents without confusing
 valid authoring files with correct runtime behavior.
 
-Current version: **1.1.0**
+Current version: **1.1.1**
 
 ## What It Covers
 

@@ -89,7 +89,7 @@ See [Routing and Dialogs](./references/routing-and-dialogs.md).
 - Add explicit `SearchAndSummarizeContent` only when source scoping, query rewriting, response capture, deterministic fallback, or post-processing is required.
 - Preserve existing pulled structures and IDs when editing. Generate IDs only for new nodes and validate their required uniqueness scope.
 - Resolve knowledge and dialog references from existing references or generated metadata. Use a pulled filename only when the owning specialist explicitly defines it as serialized identity, and never normalize it or derive identity from a display name.
-- For embedded closed-list entities, compare against the fully qualified generated choice literal. Do not replace it with a plain display string.
+- For embedded closed-list entities, the `Question` variable is a Choice/EmbeddedOptionSet, not a String. Compare against the fully qualified generated choice literal, or when hand-authoring in the code editor coerce with `Text(Topic.Var) = "Label"` and set each list item `id` equal to its `displayName`. A plain string comparison fails strict (e.g. GCC) validation with `Incompatible type comparison. Type: String, expected: EmbeddedOptionSet`.
 - Treat `init:` as node-contract dependent, not a universal first-use rule.
 - Make intentional empty branches, callee `startBehavior`, `EndConversation`, and dialog-return behavior explicit in the design and test them.
 - Configure uploaded files in the portal. YAML can describe and reference a pulled `FileGroupKnowledgeSource`, but a nearby local file is not automatically uploaded or refreshed.

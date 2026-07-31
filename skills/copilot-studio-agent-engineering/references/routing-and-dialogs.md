@@ -73,9 +73,24 @@ Test every branch, including negative and unexpected entity values.
 
 - Boolean entities should be compared as Boolean values, not quoted text.
 - Prebuilt location/state/date entities can normalize user text; test aliases and invalid input.
-- Embedded choice conditions must use their fully qualified option literal.
+- Embedded choice conditions must use their fully qualified option literal, or a `Text()`-coerced label comparison (see below).
 - Power Fx `||` and `&&` logic should be tested at each boundary.
 - `alwaysPrompt: false` can reuse an already recognized value; `alwaysPrompt: true` deliberately asks again. Test both direct invocation and invocation with pre-populated context.
+
+## Closed-List Choice Comparisons (Choice vs String)
+
+A `Question` whose `entity` is an `EmbeddedEntity` wrapping a `ClosedListEntity` produces a **Choice / EmbeddedOptionSet**-typed variable, not a String. Comparing that variable to a plain string literal in a `ConditionGroup` — `=Topic.Choice = "Option A"` — fails strict validation (observed in GCC) with:
+
+```text
+Incompatible type comparison. Type: String, expected: EmbeddedOptionSet
+```
+
+Two correct forms:
+
+1. **Graphical editor**: it auto-generates a comparison against the fully qualified generated option literal and hides the type detail, so the mismatch never appears.
+2. **Hand-authored code editor**: coerce the variable to its label with `Text()` — `=Text(Topic.Choice) = "Option A"`. Set each list item's `id` equal to its `displayName` so `Text()` returns the label you compare against.
+
+The mismatch only surfaces when hand-authoring YAML in the code editor; the graphical designer never shows it because it writes the option comparison for you. When pulling a portal-built topic, preserve whichever form is serialized — do not rewrite a generated option literal into a plain string, and do not "simplify" a `Text()` comparison back to a bare string.
 
 ## Dialog Test Cases
 

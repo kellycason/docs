@@ -4,6 +4,12 @@ All notable changes to the Copilot Studio Agent Engineering Skill are documented
 
 This project uses [Semantic Versioning](https://semver.org/).
 
+## 1.1.1 - 2026-07-31
+
+### Added
+
+- Closed-list Choice vs String comparison guidance: an `EmbeddedEntity`/`ClosedListEntity` `Question` variable is a Choice/EmbeddedOptionSet, so hand-authored `ConditionGroup` conditions must coerce with `Text(Topic.Var) = "Label"` (with each item `id` equal to its `displayName`). A bare string comparison fails strict (GCC) validation with `Incompatible type comparison. Type: String, expected: EmbeddedOptionSet`.
+
 ## 1.1.0 - 2026-07-31
 
 ### Added
