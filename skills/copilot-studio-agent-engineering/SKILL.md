@@ -1,6 +1,6 @@
 ---
 name: copilot-studio-agent-engineering
-description: 'Build, edit, audit, ground, validate, push, and test Copilot Studio YAML agents safely. Use when working with agent.mcs.yml, settings.mcs.yml, topics, knowledge, .mcs metadata, AdaptiveDialog, SearchAndSummarizeContent, routing collisions, uploaded-file knowledge, Power Fx, Copilot Studio ALM, or when an agent is valid but behaves incorrectly. Complements Copilot Studio authoring tools with source-integrity, identity-preservation, runtime-routing, and end-to-end verification guidance.'
+description: 'Build, edit, audit, ground, validate, push, and test Copilot Studio YAML agents safely. Use when working with agent.mcs.yml, settings.mcs.yml, topics, knowledge, .mcs metadata, AdaptiveDialog, SearchAndSummarizeContent, FilePrebuiltEntity, InvokeFlowAction, Power Automate tools, routing collisions, uploaded-file knowledge, Power Fx, Direct Line, Copilot Studio ALM, or when an agent is valid but behaves incorrectly. Complements Copilot Studio authoring tools with source-integrity, identity-preservation, runtime-routing, transaction-contract, and end-to-end verification guidance.'
 argument-hint: 'Describe the Copilot Studio change, audit, or behavior to investigate'
 user-invocable: true
 ---
@@ -43,6 +43,7 @@ Use this skill to prepare the evidence, constrain the work, and define verificat
 2. Check for uncommitted or unpushed local work before any pull. Do not overwrite user changes.
 3. If the project is cloud-backed, compare local and remote state. Pull fresh content before editing only after local work is understood and protected.
 4. Treat `.mcs/conn.json` as connection metadata and potentially sensitive. Read only what the management or validation tool requires; never echo tokens or secrets.
+5. For sovereign environments, discover each service and channel endpoint from authoritative metadata. Do not construct hosts by replacing commercial suffixes.
 
 ### 2. Read the Controlling Surface
 
@@ -51,8 +52,9 @@ Read only the smallest set that controls the requested behavior:
 1. `settings.mcs.yml` for `schemaName`, language, template, authentication, access control, and orchestration settings.
 2. `agent.mcs.yml` for instructions, conversation starters, model settings, and agent-level knowledge bindings.
 3. The target topic/component and every component it directly references.
-4. Hidden `.mcs/botdefinition.json` only as read-only identity/state evidence when filenames or display names are ambiguous.
-5. The actual source document for every factual response being added or changed.
+4. The registered action wrapper and persisted trigger/response contract for every flow the topic invokes.
+5. Hidden `.mcs/botdefinition.json` only as read-only identity/state evidence when filenames or display names are ambiguous.
+6. The actual source document for every factual response being added or changed.
 
 See [Identity and Authoring](./references/identity-and-authoring.md).
 
@@ -91,6 +93,11 @@ See [Routing and Dialogs](./references/routing-and-dialogs.md).
 - Treat `init:` as node-contract dependent, not a universal first-use rule.
 - Make intentional empty branches, callee `startBehavior`, `EndConversation`, and dialog-return behavior explicit in the design and test them.
 - Configure uploaded files in the portal. YAML can describe and reference a pulled `FileGroupKnowledgeSource`, but a nearby local file is not automatically uploaded or refreshed.
+- For a conversational file upload, use `FilePrebuiltEntity` and bind its `Name` and `Content` to a registered flow's native file-object contract. Do not coerce a file into a string input.
+- Keep AI extraction and transactional commit in separate flows when reviewed values or explicit confirmation must control the write.
+- Bind transaction-critical inputs explicitly. Do not delegate required write values to `AutomaticTaskInputs` or "Dynamically fill with AI."
+
+See [Files, Flows, and Transactions](./references/files-flows-and-transactions.md).
 
 ### 6. Author Through the Specialist
 
@@ -105,6 +112,8 @@ Give the Author agent:
 
 Require schema lookup for every new `kind` and for any uncertain property. Treat the extension's bundled schema as a structural drafting aid that can lag the platform. Full LSP validation is the current authoring check for the connected environment, and runtime tests remain authoritative for behavior.
 
+If authenticated cloud content pull or push remains HTTP 403 while other environment operations work, stop retrying it as a credential problem. Do not hand-author generated metadata. Preserve the diff, use the portal code editor only as an explicit fallback, and reconcile through pull when access is restored.
+
 ### 7. Validate in Layers
 
 Run these checks in order:
@@ -112,8 +121,9 @@ Run these checks in order:
 1. YAML/schema validation for edited files.
 2. Full LSP validation for the complete agent: structure, Power Fx, references, and environment rules.
 3. Reference audit: all dialog, knowledge, action, variable, and choice references resolve exactly.
-4. Runtime behavior tests in draft after push.
-5. Published-channel tests only after explicit publish approval.
+4. Action-contract audit: registered flow inputs and outputs match the topic bindings and persisted flow schema.
+5. Runtime behavior tests in draft after push.
+6. Published-channel tests only after explicit publish approval.
 
 Zero diagnostics proves only that the authoring model accepts the files. It does not prove trigger multiplicity or order, retrieval quality, abstention, authentication, channel behavior, or dialog continuation.
 
@@ -123,7 +133,7 @@ Follow:
 
 `protect local work -> compare/pull -> inspect -> edit -> validate -> review diff -> push draft -> run draft evals -> confirm publish -> publish -> test target channels`
 
-Do not use `--force` to bypass validation unless the user explicitly accepts the risk. After any portal edit, pull again before local editing because YAML-only fields and generated identities can change or be removed.
+Do not use `--force` to bypass validation unless the user explicitly accepts the risk. After any portal edit, pull again before local editing because YAML-only fields and generated identities can change or be removed. If pull is blocked, record the portal as temporary source of truth and name the missing validation layer rather than implying it passed.
 
 See [Lifecycle and Tests](./references/lifecycle-and-tests.md).
 
@@ -134,8 +144,10 @@ Do not report the work complete until all applicable statements are true:
 - every customer-specific claim has source evidence or is labeled owner-approved policy;
 - every promised transaction has a real implementation path;
 - no logical identifier was guessed or normalized;
-- full LSP validation passes without unreviewed diagnostics;
+- full LSP validation passes without unreviewed diagnostics, or an explicit platform/tooling block and substitute portal/runtime evidence are reported without calling that layer passed;
 - known-answer, no-answer, out-of-scope, multi-turn, and routing-collision tests pass;
+- conversational file contracts, review branches, confirmation, decline, and exactly-once writes pass when the agent performs document transactions;
+- returned transaction identifiers match the committed records;
 - draft versus published state is stated clearly;
 - any remaining portal-only or channel-only check is named explicitly.
 
@@ -145,5 +157,7 @@ Do not report the work complete until all applicable statements are true:
 - [Identity and Authoring](./references/identity-and-authoring.md): project anatomy, opaque identifiers, choices, variables, and generated metadata.
 - [Grounding and Capabilities](./references/grounding-and-capabilities.md): source authority, instructions, uploaded files, and grounded answer behavior.
 - [Routing and Dialogs](./references/routing-and-dialogs.md): collisions, reference graphs, empty branches, and dialog continuation.
+- [Files, Flows, and Transactions](./references/files-flows-and-transactions.md): conversational uploads, native file contracts, registered flow tools, review-before-commit design, and Direct Line evidence.
 - [Lifecycle and Tests](./references/lifecycle-and-tests.md): safe sync, validation layers, eval design, publication, and channel checks.
 - [HR Benefits Case Study](./references/hr-benefits-case-study.md): verified lessons from a sanitized source project; examples, not universal defaults.
+- [Document Intake Transaction Case Study](./references/document-intake-case-study.md): verified file-to-flow, human-review, sovereign-cloud, portal-fallback, and custom Web Chat lessons from a sanitized synthetic build.

@@ -19,6 +19,42 @@
 
 Push can fail with stale row versions even when YAML is correct. Pull-before-push prevents that only if local edits are first understood and protected.
 
+## When Cloud Content Sync Is Blocked
+
+Treat an endpoint-specific HTTP 403 differently from an expired credential:
+
+1. Confirm the tenant, account, environment, and requested resource.
+2. Refresh authentication once and retry the exact operation once.
+3. Check whether environment discovery, Dataverse, and other operations still work.
+4. If only the bot-content endpoint remains forbidden, record it as an authorization or consent boundary.
+5. Do not loop on browser sign-in, use `--force`, or hand-author generated metadata.
+
+If the portal designer remains available, it can be used as a controlled fallback with owner approval:
+
+1. preserve the local component and intended diff;
+2. open the exact portal component and its code editor;
+3. use the body shape the portal expects - topic editors can omit local `mcs.metadata` and begin at `kind: AdaptiveDialog`;
+4. after automated insertion, verify that the editor registered a dirty state and Save is enabled;
+5. save and review portal diagnostics;
+6. publish only after explicit confirmation;
+7. test the draft or published behavior at runtime;
+8. pull and reconcile as soon as supported sync is restored.
+
+Portal save validation is not full LSP validation. Name the unavailable layer and the substitute evidence precisely.
+
+## Validator Health Gate
+
+A validation run counts only when:
+
+- the language server initializes normally;
+- the intended complete workspace is open;
+- every expected component is included;
+- diagnostics finish without timeout or crash;
+- the returned status is successful and `valid` is true;
+- the error summary is zero.
+
+Process exit code zero, editor-only diagnostics, partial output, and a timed-out validator are not passing evidence.
+
 ## Validation Layers
 
 | Layer | Proves | Does not prove |
@@ -47,6 +83,10 @@ Never summarize `valid: true` as "the agent works." Report the exact validation 
 | Authentication | Anonymous, authenticated, unauthorized, and sign-in-needed paths | Access and prompts match configuration |
 | Channels | Test chat plus every deployed channel | Formatting, cards, auth, and links work per channel |
 | Source freshness | Query a recently updated fact | Remote index reflects intended version |
+| Conversational files | Valid file, wrong type, oversize, missing field, and replacement file | Native file contract reaches the intended extraction action with clear errors |
+| Transactions | Confirm, decline, retry, duplicate send, and downstream failure | Decline writes nothing; confirm writes exactly once; ambiguous failures do not duplicate |
+| Generated identifiers | Commit plus record retrieval | Identifier shown to the user matches the stored record |
+| Channel transport | Object-URL read, attachment upload, activity, and bot response | Each network and runtime boundary succeeds independently |
 
 ## Evaluation Design
 
@@ -94,6 +134,21 @@ Treat these as separate layers:
 
 Never copy an auth combination from another agent without channel-specific tests.
 
+Local auth YAML is not proof of remote or published auth state. If runtime reports an error such as `AuthenticationNotConfigured`, compare the portal settings, remote bot record, publication state, and channel behavior. Record the PAC CLI version when change detection or publication appears to ignore an authentication-only update.
+
+For sovereign environments, discover environment API, Dataverse, maker, agent-management, portal, and channel endpoints independently. A successful Azure sign-in or cloud label does not prove that a constructed service hostname is correct. Use the regional Direct Line URL returned by channel settings.
+
+## Evidence Ledger
+
+Keep four explicit states during a complex build:
+
+- verified platform state;
+- locally authored but not pushed state;
+- draft-tested state;
+- published and channel-tested state.
+
+For every failed path, record the attempted operation, exact observed boundary, whether remote state changed, and the reusable rule. This prevents repeated retries and makes completion claims auditable.
+
 ## Publication Report
 
 At completion, state:
@@ -105,3 +160,6 @@ At completion, state:
 - published or draft-only state;
 - channels tested;
 - remote knowledge/version checks still required.
+- registered action contracts and flow runs verified;
+- transaction write count and returned identifier verified;
+- blocked validation or management layers, if any, without implying they passed.

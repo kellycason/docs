@@ -21,8 +21,9 @@ Product-organized Power Platform reference guides, one-pagers, and reusable tech
 | Copilot Studio Agent Engineering | [Open package](skills/copilot-studio-agent-engineering/) | [Download latest ZIP](https://github.com/kellycason/docs/releases/latest/download/copilot-studio-agent-engineering.zip) |
 
 The Copilot Studio skill helps coding agents preserve YAML identities, ground
-answers in actual source material, audit trigger and dialog behavior, validate
-drafts, and distinguish authoring success from runtime correctness.
+answers in actual source material, audit trigger and dialog behavior, wire
+conversational files to Power Automate safely, verify transactions and custom
+channels, and distinguish authoring success from runtime correctness.
 
 Short link: https://kellycason.github.io/docs/#copilot-studio-agent-engineering
 

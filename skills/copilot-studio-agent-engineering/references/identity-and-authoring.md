@@ -45,6 +45,20 @@ knowledgeSources:
 
 Resolve the value from an existing reference, clone metadata, or LSP output. A specialist may also define a pulled filename without `.mcs.yml` as the serialized logical identity; use that convention only when explicit, without normalization. A passing YAML parser cannot detect every wrong-but-well-formed identifier; full LSP validation is required.
 
+## Flow Tool Identity
+
+A Power Automate flow has several identities that are not interchangeable:
+
+- Dataverse workflow row and workflow GUID;
+- Copilot Studio tool component and schema name;
+- display name;
+- generated action wrapper and pulled filename;
+- topic `flowId` and generated input/output contract.
+
+Register an existing flow through Copilot Studio so the platform creates the tool identity and contract. After a trigger or response schema change, save the flow, verify the persisted schema, refresh the tool, and pull again. A workflow GUID alone is not enough to reconstruct generated action metadata safely.
+
+See [Files, Flows, and Transactions](./files-flows-and-transactions.md).
+
 ## Embedded Closed-List Choices
 
 The runtime value of an embedded closed-list entity is not necessarily its display string. Pulled topics compare it to a generated option-set literal qualified by topic, trigger, and question-node identity:
@@ -101,3 +115,4 @@ Do not hand-edit:
 - Do not reformat unrelated YAML.
 - Do not copy a whole tutorial topic when one verified node pattern is enough.
 - After a portal edit, pull again. UI round-tripping can rewrite generated identities or remove YAML-only fields.
+- If cloud pull is blocked, preserve a local before/after copy and treat the portal as the temporary source of truth. Do not manufacture the missing generated identities.

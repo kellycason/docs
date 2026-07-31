@@ -4,7 +4,7 @@ Reusable engineering guidance for building, editing, grounding, validating,
 syncing, and testing Microsoft Copilot Studio YAML agents without confusing
 valid authoring files with correct runtime behavior.
 
-Current version: **1.0.0**
+Current version: **1.1.0**
 
 ## What It Covers
 
@@ -17,7 +17,11 @@ Current version: **1.0.0**
 - empty branches, dialog stack behavior, `startBehavior`, and `EndConversation`
 - schema, LSP, draft-evaluation, publish, and channel-test boundaries
 - pull-safe local/remote lifecycle and publication approval
-- a field-tested HR benefits agent case study
+- conversational file uploads and native Power Automate file contracts
+- deterministic flow bindings, human review, explicit confirmation, and exactly-once transaction tests
+- sovereign endpoint discovery, blocked-sync recovery, and validator health checks
+- Direct Line attachment transport and custom Web Chat channel verification
+- field-tested HR benefits and document-intake case studies
 
 ## Package Contents
 
@@ -26,8 +30,10 @@ Current version: **1.0.0**
 - `references/identity-and-authoring.md` - identity, references, choices, variables, IDs, and generated metadata.
 - `references/grounding-and-capabilities.md` - source authority, instructions, uploaded files, retrieval, and capability truthfulness.
 - `references/routing-and-dialogs.md` - trigger collisions, dialog references, empty branches, and continuation semantics.
+- `references/files-flows-and-transactions.md` - conversational uploads, registered flow tools, native file contracts, review-before-commit design, and Direct Line evidence.
 - `references/lifecycle-and-tests.md` - safe synchronization, validation layers, evaluations, publication, and channel testing.
 - `references/hr-benefits-case-study.md` - verified lessons that motivated the reusable rules.
+- `references/document-intake-case-study.md` - sanitized evidence from an end-to-end document extraction, review, and transaction build.
 - `VERSION` - current semantic version.
 - `CHANGELOG.md` - release history.
 
@@ -75,7 +81,7 @@ For a global installation, use `-Scope Global`. Add `-Force` to update an
 existing installation. Pin a release with:
 
 ```powershell
--Version copilot-studio-agent-engineering-v1.0.0
+-Version copilot-studio-agent-engineering-v1.1.0
 ```
 
 On macOS or Linux:
@@ -88,7 +94,7 @@ rm install-skill.sh
 ```
 
 Use `--scope global`, `--force`, or
-`--version copilot-studio-agent-engineering-v1.0.0` as needed.
+`--version copilot-studio-agent-engineering-v1.1.0` as needed.
 
 ## Use
 
@@ -98,6 +104,8 @@ After installing the complete skill folder, ask naturally, for example:
 - "Why does this valid agent run the wrong fallback topic?"
 - "Ground these agent instructions only in the uploaded policy document."
 - "Review this topic's choice literals and dialog continuation behavior."
+- "Fix this file upload topic and verify its Power Automate action contract."
+- "Trace why Direct Line accepted an attachment but the extraction flow never ran."
 - "Prepare this draft for validation, evaluation, and publication."
 
 Copilot can discover the skill automatically, or invoke

@@ -55,6 +55,13 @@ Use those capabilities rather than reproducing their templates.
 | Schema/LSP/runtime boundary | Static reference tables and the bundled schema can be incomplete or stale. Use schema lookup to draft, LSP to validate the connected authoring model, and runtime tests to prove behavior. |
 | Runtime test matrix | Known-answer tests alone miss abstention, multi-turn query rewriting, collision precedence, auth, channel, and unsupported capability failures. |
 | Local/remote safety before pull | Pull-before-push is correct only after uncommitted local work is identified and protected. |
+| Conversational file contract | `FilePrebuiltEntity` content must bind to a native file-object flow input; a string/base64 approximation fails type checking. |
+| Registered flow-tool identity | A workflow GUID and active cloud flow do not prove that Copilot Studio has generated a usable action identity and binding contract. |
+| Human-reviewed transaction boundary | AI extraction, user review, explicit confirmation, and the final write need separate evidence and often separate flows. |
+| Validator health gate | Exit code zero, editor diagnostics, timeout, or partial diagnostics can hide cross-file failures. |
+| Sovereign endpoint discovery | Environment, Dataverse, agent-management, portal, and Direct Line hosts cannot be derived safely by suffix replacement. |
+| Blocked-sync recovery | An endpoint-specific 403 can require a portal-editor fallback while generated identities remain protected. |
+| Channel upload evidence | File staging, object-URL reads, Direct Line upload, activity execution, topic routing, and flow invocation are separate boundaries. |
 
 ## Maintenance Rule
 
