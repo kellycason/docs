@@ -28,34 +28,12 @@ Never commit:
 Use explicit placeholders such as `<environment-url>`, `<website-id>`,
 `<relationship-schema-name>`, and `<portal-graph-client-id>`.
 
-## Updating The Skill
+## Updating Content
 
-1. Edit the canonical files under the applicable `skills/<skill-name>/` folder.
-2. Keep `SKILL.md` compact. Put detailed knowledge in `references/`.
-3. Run `node scripts/validate-skill.mjs`.
-4. Update `CHANGELOG.md`.
-5. Bump `VERSION` using semantic versioning:
-   - Patch: corrections or clearer guidance.
-   - Minor: a new validated workflow or integration.
-   - Major: a breaking package or workflow change.
-6. Open a pull request describing documentation evidence and runtime evidence
-   separately.
+1. Edit the applicable one-pager under `one-pagers/<name>/`.
+2. Keep the web page (`index.html`) and any exported `pdf/` in sync.
+3. Open a pull request describing the documentation evidence.
 
-## Release
+Installable agent skills now live in the
+[Power Platform Vibe Code Library](https://github.com/kellycason/vibe-code-library).
 
-After merging, create and push the matching tag:
-
-```text
-<skill-name>-v<version>
-```
-
-Supported release tags are currently:
-
-```text
-power-pages-code-site-v<version>
-power-platform-code-apps-v<version>
-copilot-studio-agent-engineering-v<version>
-```
-
-The release workflow validates every skill and publishes all ZIP packages so
-the landing page's latest-release links remain valid.

@@ -33,7 +33,9 @@
     .eyebrow { margin: 0 0 6px; color: var(--ms-blue); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
     h1 { margin: 0; color: var(--ms-heading); font-size: 34px; font-weight: 700; }
     .lede { margin: 12px 0 32px; color: var(--ms-muted); font-size: 16px; max-width: 40em; }
-    .product-nav { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 34px; padding-bottom: 14px; border-bottom: 1px solid var(--ms-border); font-size: 14px; font-weight: 600; }
+    .product-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-bottom: 34px; padding-bottom: 14px; border-bottom: 1px solid var(--ms-border); font-size: 14px; font-weight: 600; }
+    .product-nav .spacer { flex: 1; }
+    .product-nav .xlink { color: var(--ms-muted); font-weight: 600; }
     .product-section + .product-section { margin-top: 40px; }
     .product-head { margin-bottom: 14px; }
     .product-head h2 { margin: 0 0 4px; color: var(--ms-heading); font-size: 22px; }
@@ -74,12 +76,12 @@
     </div>
     <p class="eyebrow">Microsoft Power Platform</p>
     <h1>Power Platform Docs</h1>
-    <p class="lede">Product-organized reference guides, one-pagers, and reusable technical resources for the Power Platform community.</p>
+    <p class="lede">Reference guides and one-pagers for the Power Platform community &mdash; planning, governance, licensing, and platform-selection guidance.</p>
 
-    <nav class="product-nav" aria-label="Product sections">
+    <nav class="product-nav" aria-label="Sections">
       <a href="#copilot-studio">Copilot Studio</a>
-      <a href="#power-pages">Power Pages</a>
-      <a href="#code-apps">Code Apps</a>
+      <span class="spacer"></span>
+      <a class="xlink" href="https://kellycason.github.io/vibe-code-library/">Vibe Code Library &rsaquo;</a>
     </nav>
 
     <section class="product-section" id="copilot-studio">
@@ -88,11 +90,6 @@
         <p>Planning, governance, licensing, and platform-selection guidance for Microsoft Copilot Studio.</p>
       </div>
       <div class="grid">
-        <div class="card" id="copilot-studio-agent-engineering">
-          <h2><a href="skills/copilot-studio-agent-engineering/README.md">Copilot Studio Agent Engineering Skill</a></h2>
-          <p>Build, ground, validate, sync, and test Copilot Studio YAML agents, file-to-flow transactions, and custom channels.</p>
-          <div class="links"><span class="view">View package &rsaquo;</span><a href="https://github.com/kellycason/docs/releases/latest/download/copilot-studio-agent-engineering.zip">Download ZIP</a><a href="skills/copilot-studio-agent-engineering/references/lifecycle-and-tests.md">Guide</a></div>
-        </div>
         <div class="card">
           <h2><a href="one-pagers/copilot-studio-pricing-options/">Copilot Studio Pricing &amp; Licensing Options</a></h2>
           <p>How Copilot Studio is licensed, the ways to buy, and how Copilot Credits are consumed.</p>
@@ -113,38 +110,15 @@
           <p>When to use Copilot Studio or Microsoft Foundry to build AI agents &mdash; framed for US government (GCC).</p>
           <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-vs-foundry/pdf/copilot-studio-vs-foundry.pdf">PDF</a></div>
         </div>
-      </div>
-    </section>
-
-    <section class="product-section" id="power-pages">
-      <div class="product-head">
-        <h2>Power Pages</h2>
-        <p>Technical resources for building and operating Power Pages code sites.</p>
-      </div>
-      <div class="grid">
         <div class="card">
-          <h2><a href="https://github.com/kellycason/docs/tree/main/skills/power-pages-code-site">Power Pages Code Site Agent Skill</a></h2>
-          <p>Build, secure, deploy, and troubleshoot React/Vite Power Pages SPA sites with Dataverse, Server Logic, and SharePoint.</p>
-          <div class="links"><span class="view">View package &rsaquo;</span><a href="https://github.com/kellycason/docs/releases/latest/download/power-pages-code-site.zip">Download ZIP</a><a href="skills/power-pages-code-site/references/power-pages-code-site-scaffolding-guide.md">Guide</a></div>
+          <h2><a href="one-pagers/copilot-studio-platform-strengths/">Copilot Studio Decision Guide</a></h2>
+          <p>Where Copilot Studio is strongest and how to decide when it is the right platform for the job.</p>
+          <div class="links"><span class="view">View page &rsaquo;</span><a href="one-pagers/copilot-studio-platform-strengths/pdf/copilot-studio-platform-strengths.pdf">PDF</a></div>
         </div>
       </div>
     </section>
 
-    <section class="product-section" id="code-apps">
-      <div class="product-head">
-        <h2>Code Apps</h2>
-        <p>Technical resources for building and hosting Power Apps code apps on Power Platform.</p>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h2><a href="https://github.com/kellycason/docs/tree/main/skills/power-platform-code-apps">Power Apps Code Apps Agent Skill</a></h2>
-          <p>Scaffold, authenticate, connect, deploy, and troubleshoot React/Vite code apps with Dataverse, Power Platform connectors, Copilot Studio, GCC, and ALM.</p>
-          <div class="links"><span class="view">View package &rsaquo;</span><a href="https://github.com/kellycason/docs/releases/latest/download/power-platform-code-apps.zip">Download ZIP</a><a href="skills/power-platform-code-apps/references/power-platform-code-apps-field-guide.md">Guide</a></div>
-        </div>
-      </div>
-    </section>
-
-    <p class="foot">Community guidance under the MIT License. Product behavior and availability can change; confirm current details in official Microsoft documentation and your target environment.</p>
+    <p class="foot">Community guidance under the MIT License. Product behavior and availability can change; confirm current details in official Microsoft documentation and your target environment. Looking for installable agent skills? See the <a href="https://kellycason.github.io/vibe-code-library/">Power Platform Vibe Code Library</a>.</p>
   </main>
   <script>
     document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {

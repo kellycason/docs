@@ -16,13 +16,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Validate Agent Skill
-        run: node scripts/validate-skill.mjs
-
       - name: Scan for secrets
         uses: gitleaks/gitleaks-action@v2
         env:
@@ -34,9 +27,5 @@ jobs:
           args: >-
             --no-progress
             --max-retries 2
-            --exclude '^https://github.com/kellycason/docs/releases/'
             README.md
             index.html
-            skills/power-pages-code-site/README.md
-            skills/power-platform-code-apps/README.md
-            skills/copilot-studio-agent-engineering/README.md
